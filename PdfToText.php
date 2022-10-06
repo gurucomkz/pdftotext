@@ -167,14 +167,14 @@ abstract class PdfObjectBase
     // that you can specify almost everything - however, trying to recognize everything would require to develop a complete
     // parser)
     protected static $FontSpecifiers = '
-		(/F \d+ (\.\d+)? )						| 
-		(/R \d+)							| 
-		(/f-\d+-\d+)							| 
-		(/[CT]\d+_\d+)							| 
-		(/TT \d+)							| 
-		(/OPBaseFont \d+)						| 
-		(/OPSUFont \d+)							| 
-		(/[0-9a-zA-Z])							| 
+		(/F \d+ (\.\d+)? )						|
+		(/R \d+)							|
+		(/f-\d+-\d+)							|
+		(/[CT]\d+_\d+)							|
+		(/TT \d+)							|
+		(/OPBaseFont \d+)						|
+		(/OPSUFont \d+)							|
+		(/[0-9a-zA-Z])							|
 		(/F\w+)								|
 		(/[A-Za-z][A-Za-z0-9]* ( [\-+] [A-Za-z][A-Za-z0-9]* ))
 		';
@@ -196,24 +196,24 @@ abstract class PdfObjectBase
             self::$UnicodeToSimpleAscii = (isset ($unicode_to_ansi)) ? $unicode_to_ansi : array();
         }
 
-        // parent::__construct ( ) ; 
+        // parent::__construct ( ) ;
     }
 
 
     /*--------------------------------------------------------------------------------------------------------------
        NAME
            CodePointToUtf8 - Encodes a Unicode codepoint to UTF8.
-   
+
        PROTOTYPE
            $char	=  $this -> CodePointToUtf8 ( $code ) ;
-   
+
        DESCRIPTION
            Encodes a Unicode codepoint to UTF8, trying to handle all possible cases.
-   
+
        PARAMETERS
            $code (integer) -
                    Unicode code point to be translated.
-   
+
        RETURN VALUE
            A string that contains the UTF8 bytes representing the Unicode code point.
     *-------------------------------------------------------------------------------------------------------------*/
@@ -246,7 +246,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    DecodeRawName -
 		Decodes a string that may contain constructs such as '#xy', where 'xy' are hex digits.
 
@@ -305,20 +305,20 @@ abstract class PdfObjectBase
 		encountered somewhere in the PDF file :
 
 		- PDF_LZW_ENCODING :
-			a filter based on LZW Compression; it can use one of two groups of predictor functions for more 
-			compact LZW compression : Predictor 2 from the TIFF 6.0 specification and predictors (filters) 
+			a filter based on LZW Compression; it can use one of two groups of predictor functions for more
+			compact LZW compression : Predictor 2 from the TIFF 6.0 specification and predictors (filters)
 			from the PNG specification
 
 		- PDF_RLE_ENCODING :
-			a simple compression method for streams with repetitive data using the run-length encoding 
+			a simple compression method for streams with repetitive data using the run-length encoding
 			algorithm and the image-specific filters.
 
 		PDF_CCITT_FAX_ENCODING :
-			a lossless bi-level (black/white) filter based on the Group 3 or Group 4 CCITT (ITU-T) fax 
+			a lossless bi-level (black/white) filter based on the Group 3 or Group 4 CCITT (ITU-T) fax
 			compression standard defined in ITU-T T.4 and T.6.
 
 		PDF_JBIG2_ENCODING :
-			a lossy or lossless bi-level (black/white) filter based on the JBIG2 standard, introduced in 
+			a lossy or lossless bi-level (black/white) filter based on the JBIG2 standard, introduced in
 			PDF 1.4.
 
 		PDF_JPX_ENCODING :
@@ -374,13 +374,13 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetObjectReferences - Gets object references from a specified construct.
-	
+
 	    PROTOTYPE
 	        $status		=  $this -> GetObjectReferences ( $object_id, $object_data, $searched_string, &$object_ids ) ;
-	
+
 	    DESCRIPTION
 	        Certain parameter specifications are followed by an object reference of the form :
 			x 0 R
@@ -388,7 +388,7 @@ abstract class PdfObjectBase
 			[x1 0 R x2 0 R ... xn 0 r]
 		Those kind of constructs can occur after parameters such as : /Pages, /Contents, /Kids...
 		This method extracts the object references found in such a construct.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the object to be analyzed.
@@ -396,7 +396,7 @@ abstract class PdfObjectBase
 		$object_data (string) -
 			Object contents.
 
-		$searched_string (string) - 
+		$searched_string (string) -
 			String to be searched, that must be followed by an object or an array of object references.
 			This parameter can contain constructs used in regular expressions. Note however that the '#'
 			character must be escaped, since it is used as a delimiter in the regex that is applied on
@@ -404,11 +404,11 @@ abstract class PdfObjectBase
 
 		$object_ids (array of integers) -
 			Returns on output the ids of the pdf object that have been found after the searched string.
-	
+
 	    RETURN VALUE
 	        True if the searched string has been found and is followed by an object or array of object references,
 		false otherwise.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function GetObjectReferences(/** @noinspection PhpUnusedParameterInspection */
         $object_id, $object_data, $searched_string, &$object_ids)
@@ -434,13 +434,13 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetStringParameter - Retrieve a string flag value.
-	
+
 	    PROTOTYPE
 	        $result		=  $this -> GetStringParameter ( $parameter, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves the value of a string parameter ; for example :
 
@@ -449,20 +449,20 @@ abstract class PdfObjectBase
 		or :
 
 			/U <hexdigits>
-	
+
 	    PARAMETERS
 	        $parameter (string) -
 	                Parameter name.
 
 		$object_data (string) -
 			Object containing the parameter.
-	
+
 	    RETURN VALUE
 	        The parameter value.
-	
+
 	    NOTES
 	        description
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function GetStringParameter($parameter, $object_data)
     {
@@ -521,7 +521,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    IsFont -
 		Checks if the current object contents specify a font declaration.
 
@@ -538,7 +538,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    IsFormData -
 		Checks if the current object contents specify references to font data.
 
@@ -553,11 +553,11 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    IsFontMap -
 		Checks if the code contains things like :
 			<</F1 26 0 R/F2 22 0 R/F3 18 0 R>>
-		which maps font 1 (when specified with the /Fx instruction) to object 26, 2 to object 22 and 3 to 
+		which maps font 1 (when specified with the /Fx instruction) to object 26, 2 to object 22 and 3 to
 		object 18, respectively, in the above example.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -573,7 +573,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    IsImage -
 		Checks if the code contains things like :
 			/Subtype/Image
@@ -589,7 +589,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    IsObjectStream -
 		Checks if the code contains an object stream (/Type/ObjStm)
 			/Subtype/Image
@@ -673,14 +673,14 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        PregStrReplace - Replace string(s) using regular expression(s)
-	
+
 	    PROTOTYPE
-	        $result		=  PdfToText::PregStrReplace ( $pattern, $replacement, $subject, $limit = -1, 
+	        $result		=  PdfToText::PregStrReplace ( $pattern, $replacement, $subject, $limit = -1,
 						&$match_count = null )
-	
+
 	    DESCRIPTION
 	        This function behaves like a mix of str_replace() and preg_replace() ; it allows to search for strings
 		using regular expressions, but the replacements are plain-text strings and no reference to a capture
@@ -689,10 +689,10 @@ abstract class PdfObjectBase
 		interpreted by preg_replace() as references to captures.
 
 		The function has the same parameters as preg_replace().
-	
+
 	    RETURN VALUE
 	        Returns the substituted text.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function PregStrReplace($pattern, $replacement, $subject, $limit = -1)
     {
@@ -766,26 +766,26 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        ProcessEscapedCharacter - Interprets a character after a backslash in a string.
-	
+
 	    PROTOTYPE
 	        $ch		=  $this -> ProcessEscapedCharacter ( $ch ) ;
-	
+
 	    DESCRIPTION
 	        Interprets a character after a backslash in a string and returns the interpreted value.
-	
+
 	    PARAMETERS
 	        $ch (char) -
 	                Character to be escaped.
-	
+
 	    RETURN VALUE
 	        The escaped character.
 
 	    NOTES
 		This method does not process octal sequences.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function ProcessEscapedCharacter($ch)
     {
@@ -837,26 +837,26 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        ProcessEscapedString - Processes a string which can have escaped characters.
-	
+
 	    PROTOTYPE
 	        $result		=  $this -> ProcessEscapedString ( $str, $process_octal_escapes = false ) ;
-	
+
 	    DESCRIPTION
 	        Processes a string which may contain escape sequences.
-	
+
 	    PARAMETERS
 	        $str (string) -
 	                String to be processed.
 
 		$process_octal_escapes (boolean) -
 			When true, octal escape sequences such as \037 are processed.
-	
+
 	    RETURN VALUE
 	        The processed input string.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function ProcessEscapedString($str, $process_octal_escapes = false)
     {
@@ -950,7 +950,7 @@ abstract class PdfObjectBase
                         $result .= "\n";
                         break;
                     default    :
-                        // Octal escape notation 
+                        // Octal escape notation
                         if ($nch >= '0' && $nch <= '7') {
                             $ord = ord($nch) - $ord0;
                             $digits = 1;
@@ -977,13 +977,13 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        UnescapeHexCharacters - Unescapes characters in the #xy notation.
-	
+
 	    PROTOTYPE
 	        $result		=  $this -> UnescapeHexCharacters ( $data ) ;
-	
+
 	    DESCRIPTION
 		Some specifications contain hex characters specified as #xy. For the moment, I have met such a construct in
 		font aliases such as :
@@ -991,14 +991,14 @@ abstract class PdfObjectBase
 		where "#5F" stands for "_", giving :
 			/C2_0 25 0 R
 		Hope that such constructs do not happen in other places...
-	
+
 	    PARAMETERS
 	        $data (string) -
 	                String to be unescaped.
-	
+
 	    RETURN VALUE
 	        The input string with all the hex character representations replaced with their ascii equivalent.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function UnescapeHexCharacters($data)
     {
@@ -1023,7 +1023,7 @@ abstract class PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    ValidatePhpName -
 		Checks that the specified name (declared in the XML template) is a valid PHP name.
 
@@ -1069,7 +1069,7 @@ class PdfToText extends PdfObjectBase
     const        PDFOPT_IGNORE_HEADERS_AND_FOOTERS = 0x00000300;        // Ignore headers and footers
 
     const        PDFOPT_RAW_LAYOUT = 0x00000000;        // Layout rendering : raw (default)
-    const        PDFOPT_BASIC_LAYOUT = 0x00000400;        // Layout rendering : basic 
+    const        PDFOPT_BASIC_LAYOUT = 0x00000400;        // Layout rendering : basic
 
     const        PDFOPT_LAYOUT_MASK = 0x00000C00;        // Mask to isolate the targeted layout
 
@@ -1118,7 +1118,7 @@ class PdfToText extends PdfObjectBase
     public $BlockSeparator = '';
     // Separator used to separate text groups where the offset value is less than -1000 thousands of character units
     // (eg : [(1)-1822(2)] will add a separator between the characters "1" and "2")
-    // Note that such values are expressed in thousands of text units and subtracted from the current position. A 
+    // Note that such values are expressed in thousands of text units and subtracted from the current position. A
     // negative value means adding more space between the two text units it separates.
     public $Separator = ' ';
     // Separator to be used between pages in the $Text property
@@ -1156,7 +1156,7 @@ class PdfToText extends PdfObjectBase
         'times-italic' => 'timesi.fm',
         'zapfdingbats' => 'zapfdingbats.fm'
     );
-    // Author information 
+    // Author information
     public $Author = '';
     public $CreatorApplication = '';
     public $ProducerApplication = '';
@@ -1174,7 +1174,7 @@ class PdfToText extends PdfObjectBase
     public $EOL = PHP_EOL;
     // String to be used when no Unicode translation is possible
     public static $Utf8Placeholder = '';
-    // Information about memory consumption implied by the file currently being loaded 
+    // Information about memory consumption implied by the file currently being loaded
     public $MemoryUsage,
         $MemoryPeakUsage;
     // Offset of the document start (%PDF-x.y)
@@ -1228,7 +1228,7 @@ class PdfToText extends PdfObjectBase
     // Document text fragments, with their absolute (x,y) position, approximate width and height
     protected $DocumentFragments;
 
-    // Form data 
+    // Form data
     protected $FormData;
     protected $FormDataObjectNumbers;
     protected $FormDataDefinitions;
@@ -1244,8 +1244,8 @@ class PdfToText extends PdfObjectBase
     // This is mainly used for variables such as $Utf8PlaceHolder, which is initialized to a different value
     private static $StaticInitialized = false;
 
-    // Drawing instructions that are to be ignored and removed from a text stream before processing, for performance 
-    // reasons (it is faster to call preg_replace() once to remove them than calling the __next_instruction() and 
+    // Drawing instructions that are to be ignored and removed from a text stream before processing, for performance
+    // reasons (it is faster to call preg_replace() once to remove them than calling the __next_instruction() and
     // __next_token() methods to process an input stream containing such useless instructions)
     // This is an array of regular expressions where the following constructs are replaced at runtime during static
     // initialization :
@@ -1311,7 +1311,7 @@ class PdfToText extends PdfObjectBase
     // characters, so the word gets joined on the same line. Spaces after the end of the word (on the next line)
     // are removed, in order for the next word to appear at the beginning of the second line.
     private static $RemoveHyphensRegex = '#
-									( 
+									(
 										  -
 										  [ \t]* ( (\r\n) | \n | \r )+ [ \t\r\n]*
 									 )
@@ -1356,7 +1356,7 @@ class PdfToText extends PdfObjectBase
         "\xDE" => array(array("\x80", "\xBF")),
         "\xDF" => array(array("\x80", "\xBF"))
         /*
-		"\xE0"		=>  array 
+		"\xE0"		=>  array
 		   (
 			array ( "\xA0\x80", "\xA0\xBF" ),
 			array ( "\xA1\x80", "\xA1\x9F" )
@@ -1562,7 +1562,7 @@ class PdfToText extends PdfObjectBase
 	        $text	=  $pdf -> LoadFromString ( $contents, $user_password = false, $owner_password = false ) ;
 
 	    DESCRIPTION
-	        The Load() method extracts text contents from the specified PDF file. Once processed, text contents will 
+	        The Load() method extracts text contents from the specified PDF file. Once processed, text contents will
 		be available through the "Text" property.
 		The LoadFromString() method performs the same operation on PDF contents already loaded into memory.
 
@@ -1682,7 +1682,7 @@ class PdfToText extends PdfObjectBase
             $this->IgnoredInstructions = self::$IgnoredInstructionsNoLayout;
 
 
-        // Debug statistics 
+        // Debug statistics
         $this->Statistics = array
         (
             'TextSize' => 0,                // Total size of drawing instructions ("text" objects)
@@ -1945,7 +1945,7 @@ class PdfToText extends PdfObjectBase
 
 
                 // The current object may be a text object that have been defined as an XObject in some other object
-                // In this case, we have to keep it since it may be referenced by a /TPLx construct from within 
+                // In this case, we have to keep it since it may be referenced by a /TPLx construct from within
                 // another text object
                 if ($text_data)
                     $this->PageMap->AddTemplateObject($object_number, $text_data);
@@ -2066,7 +2066,7 @@ class PdfToText extends PdfObjectBase
             $instruction_count = 0;
             $statistics = array();
 
-            // Count the total number of instructions 
+            // Count the total number of instructions
             foreach ($this->Statistics ['Distributions'] as $count)
                 $instruction_count += $count;
 
@@ -2103,13 +2103,13 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        AddAdobeExtraMappings - Adds extra mappings for standard Adobe fonts.
-	
+
 	    PROTOTYPE
 	        $pdf -> AddAdobeExtraMappings ( $mappings ) ;
-	
+
 	    DESCRIPTION
 	        Adobe supports 4 predefined fonts : standard, Mac, WinAnsi and PDF). All the characters in these fonts
 		are identified by a character time, a little bit like HTML entities ; for example, 'one' will be the
@@ -2118,13 +2118,13 @@ class PdfToText extends PdfObjectBase
 		Some of them are not in this list ; this is the case for example of the 'ax' character names, where 'x'
 		is a decimal number. When such a character is specified in a /Differences array, then there is somewhere
 		a CharProc[] array giving an object id for each of those characters.
-		The referenced object(s) in turn contain drawing instructions to draw the glyph. At no point you could 
+		The referenced object(s) in turn contain drawing instructions to draw the glyph. At no point you could
 		guess what is the corresponding Unicode character for this glyph, since the information is not contained
 		in the PDF file.
 		The AddAdobeExtraMappings() method allows you to specify such correspondences. Specify an array as the
-		$mappings parameter, whose keys are the Adobe character name (for example, "a127") and values the 
+		$mappings parameter, whose keys are the Adobe character name (for example, "a127") and values the
 		corresponding Unicode values (see the description of the $mappings parameter for more information).
-	
+
 	    PARAMETERS
 	        $mappings (associative array) -
 	                Associative array whose keys are Adobe character names. The array values can take several forms :
@@ -2142,12 +2142,12 @@ class PdfToText extends PdfObjectBase
 			  . Arrays with less that 4 elements will be padded, using the last array item for padding
 			  . Arrays with more than 4 elements will be silently truncated
 			  . Each array value can either be a character or a numeric value.
-	
+
 	    NOTES
 	        In this current implementation, the method applies the mappings to ALL Adobe default fonts. That is,
 		you cannot have one mapping for one Adobe font referenced in the PDF file, then a second mapping for
 		a second Adobe font, etc.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function AddAdobeExtraMappings($mappings)
     {
@@ -2196,23 +2196,23 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetPageFromOffset - Returns a page number from a text offset.
-	
+
 	    PROTOTYPE
 	        $offset		=  $pdf -> GetPageFromOffset ( $offset ) ;
-	
+
 	    DESCRIPTION
 	        Given a byte offset in the Text property, returns its page number in the pdf document.
-	
+
 	    PARAMETERS
 	        $offset (integer) -
 	                Offset, in the Text property, whose page number is to be retrieved.
-	
+
 	    RETURN VALUE
 	        Returns a page number in the pdf document, or false if the specified offset does not exist.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetPageFromOffset($offset)
     {
@@ -2229,31 +2229,31 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        text_strpos, text_stripos - Search for an occurrence of a string.
-	
+
 	    PROTOTYPE
 	        $result		=  $pdf -> text_strpos  ( $search, $start = 0 ) ;
 	        $result		=  $pdf -> text_stripos ( $search, $start = 0 ) ;
-	
+
 	    DESCRIPTION
 	        These methods behave as the strpos/stripos PHP functions, except that :
 		- They operate on the text contents of the pdf file (Text property)
 		- They return an array containing the page number and text offset. $result [0] will be set to the page
 		  number of the searched text, and $result [1] to its offset in the Text property
-	
+
 	    PARAMETERS
 	        $search (string) -
 	                String to be searched.
 
 		$start (integer) -
 			Start offset in the pdf text contents.
-	
+
 	    RETURN VALUE
 	        Returns an array of two values containing the page number and text offset if the searched string has
 		been found, or false otherwise.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function text_strpos($search, $start = 0)
     {
@@ -2278,14 +2278,14 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        document_strpos, document_stripos - Search for all occurrences of a string.
-	
+
 	    PROTOTYPE
 	        $result		=  $pdf -> document_strpos  ( $search, $group_by_page = false ) ;
 	        $result		=  $pdf -> document_stripos ( $search, $group_by_page = false ) ;
-	
+
 	    DESCRIPTION
 		Searches for ALL occurrences of a given string in the pdf document. The value of the $group_by_page
 		parameter determines how the results are returned :
@@ -2300,18 +2300,18 @@ class PdfToText extends PdfObjectBase
 			[ [ 1, 100 ], [ 1, 200 ], [ 3, 157 ] ]
 		- When $group_by_page is true :
 			[ 1 => [ 100, 200 ], 3 => [ 157 ] ]
-	
+
 	    PARAMETERS
 	        $search (string) -
 	                String to be searched.
 
 		$group_by_page (boolean) -
 			Indicates whether the found offsets should be grouped by page number or not.
-	
+
 	    RETURN VALUE
 	        Returns an array of page numbers/character offsets (see Description above) or false if the specified
 		string does not appear in the document.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function document_strpos($text, $group_by_page = false)
     {
@@ -2364,26 +2364,26 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        text_match, document_match - Search string using regular expressions.
-	
+
 	    PROTOTYPE
 	        $status		=  $pdf -> text_match ( $pattern, &$match = null, $flags = 0, $offset = 0 ) ;
 	        $status		=  $pdf -> document_match ( $pattern, &$match = null, $flags = 0, $offset = 0 ) ;
-	
+
 	    DESCRIPTION
 	        text_match() calls the preg_match() PHP function on the pdf text contents, to locate the first occurrence
 		of text that matches the specified regular expression.
 		document_match() calls the preg_match_all() function to locate all occurrences that match the specified
 		regular expression.
-		Note that both methods add the PREG_OFFSET_CAPTURE flag when calling preg_match/preg_match_all so you 
+		Note that both methods add the PREG_OFFSET_CAPTURE flag when calling preg_match/preg_match_all so you
 		should be aware that all captured results are an array containing the following entries :
 		- Item [0] is the captured string
 		- Item [1] is its text offset
 		- The text_match() and document_match() methods add an extra array item (index 2), which contains the
 		  page number where the matched text resides
-	
+
 	    PARAMETERS
 	        $pattern (string) -
 	                Regular expression to be searched.
@@ -2396,10 +2396,10 @@ class PdfToText extends PdfObjectBase
 
 		$offset (integer) -
 			Start offset. See preg_match/preg_match_all.
-	
+
 	    RETURN VALUE
 	        Returns the number of matched occurrences, or false if the specified regular expression is invalid.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function text_match($pattern, &$match = null, $flags = 0, $offset = 0)
     {
@@ -2436,7 +2436,7 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    HasFormData -
 		Returns true if the PDF file contains form data or not.
 
@@ -2448,7 +2448,7 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    GetFormCount -
 		Returns the number of top-level forms contained in the PDF file.
 
@@ -2460,28 +2460,28 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetFormData - Returns form data, if any
-	
+
 	    PROTOTYPE
 	        $object		=  $pdf -> GetFormData ( $template = null, $form_index = 0 ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves form data if present.
-	
+
 	    PARAMETERS
 	        $template (string) -
 	                An XML file describing form data using human-readable names for field values.
-			If not specified, the inline form definitions will be used, together with the field names 
+			If not specified, the inline form definitions will be used, together with the field names
 			specified in the PDF file.
 
 		$form_index (integer) -
 			Form index in the PDF file. So far, I really don't know if a PDF file can have multiple forms.
-	
+
 	    RETURN VALUE
 	        An object derived from the PdfToTextFormData class.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetFormData($template = null, $form_index = 0)
     {
@@ -2514,13 +2514,13 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        MarkTextLike - Marks output text.
-	
+
 	    PROTOTYPE
 	        $pdf -> MarkTextLike ( $regex, $marker_start, $marker_end ) ;
-	
+
 	    DESCRIPTION
 	        Sometimes it may be convenient, when you want to extract only a portion of text, to say : "I want to
 		extract text between this title and this title". The MarkTextLike() method provides some support for
@@ -2552,7 +2552,7 @@ class PdfToText extends PdfObjectBase
 		The font name used for the first string matched by the specified regular expression will be searched
 		later to add markers around all the text portions using this font.
 
-	
+
 	    PARAMETERS
 	        $regex (string) -
 	                A regular expression to match the text to be matched. Subsequent portions of text using the
@@ -2560,7 +2560,7 @@ class PdfToText extends PdfObjectBase
 
 		$marker_start, $marker_end (string) -
 			Markers to surround the string when a match is found.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function MarkTextLike($regex, $marker_start, $marker_end)
     {
@@ -2574,23 +2574,23 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        SetCaptures, SetCapturesFromString - Defines document parts to be captured.
-	
+
 	    PROTOTYPE
 	        $pdf -> SetCaptures ( $xml_file ) ;
 		$pdf -> SetCapturesFromString ( $xml_data ) ;
-	
+
 	    DESCRIPTION
 	        Defines document parts to be captured.
 		SetCaptures() takes the definitions for the areas to be captured from an XML file, while
 		SetCapturesFromString() takes them from a string representing xml capture definitions.
-	
+
 	    NOTES
 	        - See file README.md for an explanation on the format of the XML capture definition file.
 		- The SetCaptures() methods must be called before the Load() method.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function SetCaptures($xml_file)
     {
@@ -2614,24 +2614,24 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetCaptures - Returns captured data.
-	
+
 	    PROTOTYPE
 	        $object		=  $pdf -> GetCaptures ( $full = false ) ;
-	
-	    PARAMETERS 
+
+	    PARAMETERS
 		$full (boolean) -
 			When true, the whole captures, togethers with their definitions, are returned. When false,
 			only a basic object containing the capture names and their values is returned.
 
 	    DESCRIPTION
 	        Returns the object that contains captured data.
-	
+
 	    RETURN VALUE
 	        An object of type Captures, or false if an error occurred.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetCaptures($full = false)
     {
@@ -2666,19 +2666,19 @@ class PdfToText extends PdfObjectBase
      */
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        AddImage - Adds an image from the PDF stream to the current object.
-	
+
 	    PROTOTYPE
 	        $this -> AddImage ( $object_id, $stream_data, $type, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Adds an image from the PDF stream to the current object.
 		If the PDFOPT_GET_IMAGE_DATA flag is enabled, image data will be added to the ImageData property.
 		If the PDFOPT_DECODE_IMAGE_DATA flag is enabled, a jpeg resource will be created and added into the
 		Images array property.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Pdf object id.
@@ -2688,7 +2688,7 @@ class PdfToText extends PdfObjectBase
 
 		$type (integer) -
 			One of the PdfToText::PDF_*_ENCODING constants.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function AddImage($object_id, $stream_data, $type, $object_data)
     {
@@ -2791,7 +2791,7 @@ class PdfToText extends PdfObjectBase
                 $decoded_stream_data = $this->__decode_ascii_85($stream_data);
 
                 // Dumbly check if this could not be gzipped data after decoding (normally, the object flags should also specify
-                // the /FlateDecode flag) 
+                // the /FlateDecode flag)
                 if ($decoded_stream_data !== false && ($result = @gzuncompress($decoded_stream_data)) !== false)
                     $decoded_stream_data = $result;
 
@@ -2895,7 +2895,7 @@ class PdfToText extends PdfObjectBase
                 $previous_index = 256;
                 $dictionary = $InitialDictionary;
             } // First entry
-            else    // $previous_index  === 256 
+            else    // $previous_index  === 256
             {
                 // first entry
                 $result .= $dictionary [$index];
@@ -3036,16 +3036,16 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        DecodeImage - Returns decoded image contents.
-	
+
 	    PROTOTYPE
 	        TBC
-	
+
 	    DESCRIPTION
 	        description
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Pdf object number.
@@ -3059,10 +3059,10 @@ class PdfToText extends PdfObjectBase
 		$autosave (boolean) -
 			When autosave is selected, images will not be decoded into memory unless they have a format
 			different from JPEG. This is intended to save memory.
-	
+
 	    RETURN VALUE
 	        Returns an object of type PdfIMage, or false if the image encoding type is not currently supported.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function DecodeImage(/** @noinspection PhpUnusedParameterInspection */
         $object_id, $stream_data, $type, $object_data, $autosave)
@@ -3095,19 +3095,19 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        DecodeObjectStream - Decodes an object stream.
-	
+
 	    PROTOTYPE
 	        $array	=  $this -> DecodeObjectStream ( $object_id, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Decodes an object stream. An object stream is yet another PDF object type that contains itself several
 		objects not defined using the "x y obj ... endobj" syntax.
-		As far as I understood, object streams data is contained within stream/endstream delimiters, and is 
+		As far as I understood, object streams data is contained within stream/endstream delimiters, and is
 		gzipped.
-		Object streams start with a set of object id/offset pairs separated by a space ; catenated object data 
+		Object streams start with a set of object id/offset pairs separated by a space ; catenated object data
 		immediately follows the last space ; for example :
 
 			1167 0 1168 114 <</DA(/Helv 0 Tf 0 g )/DR<</Encoding<</PDFDocEncoding 1096 0 R>>/Font<</Helv 1094 0 R/ZaDb 1095 0 R>>>>/Fields[]>>[/ICCBased 1156 0 R]
@@ -3119,14 +3119,14 @@ class PdfToText extends PdfObjectBase
 			. Object #1168, which starts at offset #114 and continues until the end of the object stream.
 			  It contains the following data :
 				[/ICCBased 1156 0 R]
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Pdf object number.
 
 		$object_data (string) -
 			Object data.
-	
+
 	    RETURN VALUE
 	        Returns false if any error occurred (mainly for syntax reasons).
 		Otherwise, returns an associative array containing the following elements :
@@ -3138,7 +3138,7 @@ class PdfToText extends PdfObjectBase
 		The reason for this format is that it is identical to the array returned by the preg_match() function
 		used in the Load() method for finding objects in a PDF file (ie, a regex that matches "x y oj/endobj"
 		constructs).
-		
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function DecodeObjectStream($object_id, $object_data)
     {
@@ -3206,31 +3206,31 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        ExtractTextData - Extracts text, header & footer information from a text object.
-	
+
 	    PROTOTYPE
 	        $this -> ExtractTextData ( $object_id, $stream_contents, &$text, &$header, &$footer ) ;
-	
+
 	    DESCRIPTION
 	        Extracts text, header & footer information from a text object. The extracted text contents will be
 		stripped from any header/footer information.
-	
+
 	    PARAMETERS
 	        $text (string) -
 	                Variable that will receive text contents.
 
 		$header, $footer (string) -
 			Variables that will receive header and footer information.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function ExtractTextData(/** @noinspection PhpUnusedParameterInspection */
         $object_id, $stream_contents, &$text, &$header, &$footer)
     {
         // Normally, a header or footer is introduced with a construct like :
         //	<< /Type /Pagination ... [/Bottom] ... >> (or [/Top]
-        // The initial regular expression was : 
+        // The initial regular expression was :
         //	<< .*? \[ \s* / (?P<location> (Bottom) | (Top) ) \s* \] .*? >> \s* BDC .*? EMC
         // (the data contained between the BDC and EMC instructions are text-drawing instructions).
         // However, this expression revealed to be too greedy and captured too much data ; in the following example :
@@ -3238,11 +3238,11 @@ class PdfToText extends PdfObjectBase
         // everything was captured, from the initial "<<M/MCID 0>>" to the final "EMC", which caused regular page contents to be interpreted as page bottom
         // contents.
         // The ".*?" in the regex has been replaced with "[^>]*?", which works better. However, it will fail to recognize header/footer contents if
-        // the header/footer declaration contains a nested construct , such as : 
+        // the header/footer declaration contains a nested construct , such as :
         //	<< /Type /Pagination ... [/Bottom] ... << (some nested contents) >> ... >> (or [/Top]
         // Let's wait for the case to happen one day...
         static $header_or_footer_re = '#
-								(?P<contents> 
+								(?P<contents>
 									<< [^>]*? \[ \s* / (?P<location> (Bottom) | (Top) ) \s* \] [^>]*? >> \s*
 									BDC .*? EMC
 								 )
@@ -3462,7 +3462,7 @@ class PdfToText extends PdfObjectBase
 
                             // Characters are encoded within angle brackets ( "<>" ).
                             // Note that several characters can be specified within the same angle brackets, so we have to take
-                            // into account the width we detected in the begincodespancerange construct 
+                            // into account the width we detected in the begincodespancerange construct
                             if ($is_hex) {
                                 for ($i = 1; $i < $length; $i += $current_font_map_width) {
                                     $value = substr($text, $i, $current_font_map_width);
@@ -3590,7 +3590,7 @@ class PdfToText extends PdfObjectBase
                                         // the character width for the current font (if the character width is 4 hex digits, then we
                                         // will encounter constructs such as "\000\077").
                                         // The method used here is dirty : we build a regex to match octal character representations on a substring
-                                        // of the text 
+                                        // of the text
                                         else {
                                             $width = $current_font_map_width / 2;    // Convert to byte count
                                             $subtext = substr($text, $i - 1);
@@ -4192,10 +4192,10 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        ExtractTextWithLayout - Extracts text, trying to render the page layout.
-	
+
 		$text 	=  $this -> ExtractTextWithLayout ( $page_number, $object_id, $data, &$current_font ) ;
 
 	    DESCRIPTION
@@ -4219,7 +4219,7 @@ class PdfToText extends PdfObjectBase
 
 	    RETURN VALUE
 		Returns the decoded text.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function ExtractTextWithLayout(&$page_fragments, $page_number, $object_id, $data, &$current_font)
     {
@@ -4232,7 +4232,7 @@ class PdfToText extends PdfObjectBase
         // Initial (default) transformation matrix. To reflect the PDF specifications, we will keep it as a 6 elements array :
         //	[ sx tx ty sy x y ]
         // (although tx and ty are not useful here, since they affect the graphic orientation of the text)
-        // sx and sy are scaling parameters, actually a multiplier for the x and y parameters. We only keep 
+        // sx and sy are scaling parameters, actually a multiplier for the x and y parameters. We only keep
         static $IdentityMatrix = array(1, 0, 0, 1, 0, 0);
 
         // Remove useless instructions
@@ -4420,7 +4420,7 @@ class PdfToText extends PdfObjectBase
 
                     // ' instruction : go to next line and display text
                     case    "'" :
-                        // Update the coordinates of the last text block found so far 
+                        // Update the coordinates of the last text block found so far
                         $page_fragments [$page_fragment_count - 1] ['x'] += $text_leading;
                         $offset = $current_font_height * abs($Tm [3]);
                         $page_fragments [$page_fragment_count - 1] ['y'] -= $offset;
@@ -4518,7 +4518,7 @@ class PdfToText extends PdfObjectBase
                 $graphic_stack [$graphic_stack_size++] = array($CTM, $Tm);
 
                 $enhanced_statistics && $this->Statistics ['Distributions'] ['BT']++;
-            } // ET instruction 
+            } // ET instruction
             else if ($token == 'ET') {
                 if ($BT_nesting_level) {
                     $BT_nesting_level--;
@@ -4557,7 +4557,7 @@ class PdfToText extends PdfObjectBase
     // __matrix_multiply -
     //	Multiplies matrix $ma by $mb.
     //	PDF transformation matrices are 3x3 matrices containing the following values :
-    //	
+    //
     //		| sx rx 0 |
     //		| ry sy 0 |
     //		| tx ty 1 |
@@ -4570,7 +4570,7 @@ class PdfToText extends PdfObjectBase
                                         $page_width, /** @noinspection PhpUnusedParameterInspection */
                                         $page_height)
     {
-        // Scaling text is only appropriate for rendering graphics ; in our case, we just have to render 
+        // Scaling text is only appropriate for rendering graphics ; in our case, we just have to render
         // basic text without any consideration about its width or height ; so adjust the sx/sy parameters
         // accordingly
         $scale_1x = ($ma [0] > 0) ? 1 : -1;
@@ -4813,7 +4813,7 @@ class PdfToText extends PdfObjectBase
 
                 // Characters are encoded within angle brackets ( "<>" ).
                 // Note that several characters can be specified within the same angle brackets, so we have to take
-                // into account the width we detected in the begincodespancerange construct 
+                // into account the width we detected in the begincodespancerange construct
                 if ($is_hex) {
                     for ($i = 1; $i < $length; $i += $current_font_map_width) {
                         $value = substr($text, $i, $current_font_map_width);
@@ -4939,7 +4939,7 @@ class PdfToText extends PdfObjectBase
                             // the character width for the current font (if the character width is 4 hex digits, then we
                             // will encounter constructs such as "\000\077").
                             // The method used here is dirty : we build a regex to match octal character representations on a substring
-                            // of the text 
+                            // of the text
                             else {
                                 $width = $current_font_map_width / 2;    // Convert to byte count
                                 $subtext = substr($text, $i - 1);
@@ -5067,7 +5067,7 @@ class PdfToText extends PdfObjectBase
         usort($fragments, array($this, '__sort_page_fragments'));
         $line_fragments = $this->__group_line_fragments($fragments);
 
-        // Retrieve the page attributes 
+        // Retrieve the page attributes
         $page_attributes = $this->PageMap->PageAttributes [$page_number];
 
         // Some buggy PDF do not specify page width or page height so, during the processing of text fragments,
@@ -5133,7 +5133,7 @@ class PdfToText extends PdfObjectBase
                     }
                 }
 
-                // Add debug info if needed 
+                // Add debug info if needed
                 if ($this->Options & self::PDFOPT_DEBUG_SHOW_COORDINATES)
                     $result .= $this->__debug_get_coordinates($fragment);
 
@@ -5258,19 +5258,19 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetTrailerInformation - Retrieves trailer information.
-	
+
 	    PROTOTYPE
 	        $this -> GetTrailerInformation ( $contents ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves trailer information :
 		- Unique file ID
 		- Id of the object containing encryption data, if the PDF file is encrypted
 		- Encryption data
-	
+
 	    PARAMETERS
 	        $contents (string) -
 	                PDF file contents.
@@ -5493,7 +5493,7 @@ class PdfToText extends PdfObjectBase
 
     // __get_character_padding :
     //	If the offset specified between two character groups in an array notation for displaying text is less
-    //	than -MinSpaceWidth thousands of text units, 
+    //	than -MinSpaceWidth thousands of text units,
     private function __get_character_padding($char_offset)
     {
         if ($char_offset <= -$this->MinSpaceWidth) {
@@ -5616,7 +5616,7 @@ class PdfToText extends PdfObjectBase
         else
             $result = $template;
 
-        // All done, return 
+        // All done, return
         return ($result);
     }
 
@@ -5785,7 +5785,7 @@ class PdfToText extends PdfObjectBase
 
     // __is_rtl_separator -
     //	RTL words are separated by spaces and punctuation signs that are specified as LTR characters.
-    //	However, such sequences, which are separators between words, must be considered as being part 
+    //	However, such sequences, which are separators between words, must be considered as being part
     //	of an RTL sequence of words and therefore be reversed with them.
     //	This function helps to determine if the supplied string is simply a sequence of spaces and
     //	punctuation (a word separator) or plain text, that must keep its position in the line.
@@ -5823,23 +5823,23 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        IsPageSelected - Checks if a page is selected for output.
-	
+
 	    PROTOTYPE
 	        $status		=  $this -> IsPageSelected ( $page ) ;
-	
+
 	    DESCRIPTION
 	        Checks if the specified page is to be selected for output.
-	
+
 	    PARAMETERS
 	        $page (integer) -
 	                Page to be checked.
-	
+
 	    RETURN VALUE
 	        True if the page is to be selected for output, false otherwise.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function IsPageSelected($page)
     {
@@ -5849,30 +5849,30 @@ class PdfToText extends PdfObjectBase
         if ($this->MaxSelectedPages > 0)
             return ($page <= $this->MaxSelectedPages);
 
-        // MaxSelectedPages  <  0 
+        // MaxSelectedPages  <  0
         return ($page > count($this->PageMap->Pages) + $this->MaxSelectedPages);
     }
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        PeekAuthorInformation - Gets author information from the specified object data.
-	
+
 	    PROTOTYPE
 	        $this -> PeekAuthorInformation ( $object_id, $object_data ) ;
-	
+
 	    DESCRIPTION
-	        Try to check if the specified object data contains author information (ie, the /Author, /Creator, 
+	        Try to check if the specified object data contains author information (ie, the /Author, /Creator,
 		/Producer, /ModDate, /CreationDate keywords) and sets the corresponding properties accordingly.
-	
+
 	    PARAMETERS
 	    	$object_id (integer) -
 	    		Object id of this text block.
 
 	    	$object_data (string) -
 	    		Stream contents.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function PeekAuthorInformation($object_id, $object_data)
     {
@@ -5885,23 +5885,23 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        RetrieveAuthorInformation - Extracts author information
-	
+
 	    PROTOTYPE
 	        $this -> RetriveAuthorInformation ( $object_id, $pdf_objects ) ;
-	
+
 	    DESCRIPTION
 	        Extracts the author information. Handles the case where flag values refer to existing objects.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the object containing the author information.
 
 		$pdf_objects (array) -
 			Array whose keys are the PDF object ids, and values their corresponding contents.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function RetrieveAuthorInformation($object_id, $pdf_objects)
     {
@@ -5909,7 +5909,7 @@ class PdfToText extends PdfObjectBase
 							(?P<info>
 								/
 								(?P<keyword> (Author) | (Creator) | (Producer) | (Title) | (CreationDate) | (ModDate) | (Keywords) | (Subject) )
-								\s* 
+								\s*
 								(?P<opening> [(<])
 							)
 						    #imsx';
@@ -5917,7 +5917,7 @@ class PdfToText extends PdfObjectBase
 							(?P<info>
 								/
 								(?P<keyword> (Author) | (Creator) | (Producer) | (Title) | (CreationDate) | (ModDate) | (Keywords) | (Subject) )
-								\s* 
+								\s*
 								(?P<object_ref>
 									(?P<object> \d+)
 									\s+
@@ -6032,16 +6032,16 @@ class PdfToText extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        RetrieveFormData - Retrieves raw form data
-	
+
 	    PROTOTYPE
 	        $this -> RetrieveFormData ( $object_id, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves raw form data (form definition and field values definition).
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the object containing the author information.
@@ -6051,11 +6051,11 @@ class PdfToText extends PdfObjectBase
 
 		$pdf_objects (array) -
 			Array whose keys are the PDF object ids, and values their corresponding contents.
-		
+
 	    NOTES
 	        This function only memorizes the contents of form data definitions. The actual data will be processed
 		only if the GetFormData() function is called.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function RetrieveFormData($object_id, $object_data, $pdf_objects)
     {
@@ -6113,7 +6113,7 @@ class PdfTexterFontTable extends PdfObjectBase
     private $DefaultFont = false;
     // Font mapping between a font number and an object number
     private $FontMap = array();
-    // A character map buffer is used to store results from previous calls to the MapCharacter() method of the 
+    // A character map buffer is used to store results from previous calls to the MapCharacter() method of the
     // FontTable object. It dramatically reduces the number of calls needed, from one call for each character
     // defined in the pdf stream, to one call on each DISTINCT character defined in the PDF stream.
     // As an example, imagine a PDF file that contains 200K characters, but only 150 distinct ones. The
@@ -6496,11 +6496,11 @@ class PdfTexterFont extends PdfObjectBase
         // Retrieve the character widths for this font. This means :
         // - Retrieving the /FirstChar, /LastChar and /Widths entries from the font definition. /Widths is an array of individual character
         //   widths, between the /FirstChar and /LastChar entries. A value of zero in this array means "Use the default width"...
-        // - ... which is given by the /MissingWidth parameter, normally put in the font descriptor whose object id is given by the 
+        // - ... which is given by the /MissingWidth parameter, normally put in the font descriptor whose object id is given by the
         //   /FontDescriptor entry of the font definition
         // Well, to be considered, given the number of buggy PDFs around the world, we won't care about the /LastChar entry and we won't
         // check whether the /Widths array contains (LastChar - FirstChar + 1) integer values...
-        // Get the entries 
+        // Get the entries
         $first_char = false;
         $widths = false;
         $missing_width = false;
@@ -6616,31 +6616,31 @@ class PdfTexterFont extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetStringWidth - Returns the length of a string, in 1/100 of points
-	
+
 	    PROTOTYPE
 	        $width		=  $font -> GetStringWidth ( $text, $extra_percent ) ;
-	
+
 	    DESCRIPTION
-	        Returns the length of a string, in 1/100 of points. 
-	
+	        Returns the length of a string, in 1/100 of points.
+
 	    PARAMETERS
 	        $text (string) -
 	                String whose length is to be measured.
 
 		$extra_percent (double) -
 			Extra percentage to be added to the computed width.
-	
+
 	    RETURN VALUE
 	        Returns the length of the specified string in 1/1000 of text points, or 0 if the font does not
 		contain any character width information.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetStringWidth($text, $extra_percent)
     {
-        // No width information 
+        // No width information
         if (!$this->GotWidthInformation)
             return (false);
 
@@ -6672,7 +6672,7 @@ class PdfTexterFont extends PdfObjectBase
         // by the ExtraTextWidth property
         $divisor = 100 - $extra_percent;
 
-        if ($divisor < 50)            // Arbitrarily fix a limit 
+        if ($divisor < 50)            // Arbitrarily fix a limit
             $divisor = 50;
 
         // All done, return
@@ -6730,12 +6730,12 @@ abstract class PdfTexterCharacterMap extends PdfObjectBase implements \ArrayAcce
 	        Interface implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new DecodingException ("Unsupported operation."));
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         error(new DecodingException ("Unsupported operation."));
     }
@@ -6925,7 +6925,7 @@ class PdfTexterUnicodeMap extends PdfTexterCharacterMap
                 }
             }
 
-            // Sort the ranges by their starting offsets 
+            // Sort the ranges by their starting offsets
             $this->RangeCount = count($this->RangeMap);
 
             if ($this->RangeCount > 1) {
@@ -6953,13 +6953,13 @@ class PdfTexterUnicodeMap extends PdfTexterCharacterMap
 	        Interface implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return (count($this->DirectMap));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return ($this->offsetGetSafe($offset) !== false);
     }
@@ -7006,7 +7006,7 @@ class PdfTexterUnicodeMap extends PdfTexterCharacterMap
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         $code = $this->offsetGetSafe($offset);
 
@@ -7187,13 +7187,13 @@ class PdfTexterEncodingMap extends PdfTexterCharacterMap
 	        Interface implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return (count($this->Map));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return ((!$this->Secondary) ?
             isset ($this->Map [$offset]) :
@@ -7201,7 +7201,7 @@ class PdfTexterEncodingMap extends PdfTexterCharacterMap
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (!$this->Secondary) {
             if (isset ($this->Map [$offset]))
@@ -7276,19 +7276,19 @@ abstract class PdfTexterAdobeMap extends PdfTexterCharacterMap
 	        Interface implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return (count($this->Map [$this->Variant]));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return (isset ($this->Map [$this->Variant] [$offset]));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (isset ($this->Map [$this->Variant] [$offset]))
             $ord = $this->Map [$this->Variant] [$offset];
@@ -7702,7 +7702,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
     //	$map	=  array
     //	   (
     //		'plain'		=>  array
-    //		   ( 
+    //		   (
     //			$cid1	=>  $utf1,
     //			...
     //		    )
@@ -7718,7 +7718,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Loads the specified map.
 		If the map files contains a definition such as :
@@ -7726,7 +7726,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
 			$map	=  'IDENTITY-H-GQJGLM.cid' ;
 
 		then the specified map will be loaded instead (ony one ndirection is supported).
-	    	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($object_id, $map_name, $font_variant)
     {
@@ -7734,7 +7734,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
         parent::__construct($object_id);
         $this->HexCharWidth = 4;            // So far, CIDs are 2-bytes long
 
-        // Since alternate characters can be apparently prefixed by 0x0000 or 0x0001, two calls to the array access operator 
+        // Since alternate characters can be apparently prefixed by 0x0000 or 0x0001, two calls to the array access operator
         // will be needed to retrieve the exact character in such cases
         // This is why we have to tell the upper layers not to cache the results
         $this->Cache = false;
@@ -7745,7 +7745,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
         if (isset (self::$CachedMaps [$map_index])) {
             $map = self::$CachedMaps [$map_index] ['map'];
             $file = self::$CachedMaps [$map_index] ['file'];
-        } // Otherwise, 
+        } // Otherwise,
         else {
             $file = $this->__get_cid_file($map_name, $font_variant);
 
@@ -7753,7 +7753,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
             if (!file_exists($file)) {
                 if (PdfToText::$DEBUG)
                     warning(new DecodingException ("Could not find CID table \"$map_name\" in directory \"" . PdfToText::$CIDTablesDirectory . "\"."));
-            } // Otherwise, load the CID map 
+            } // Otherwise, load the CID map
             else {
                 /** @noinspection PhpIncludeInspection */
                 include($file);
@@ -7780,12 +7780,12 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    __get_cid_file -
 		Searches in the CIDTables directory for the CID map that best matches the specified map name (usually,
 		IDENTITY-H) and the optional font variant.
 
-		If a font variant has been specified, like "ABCD+Italic-Arial", then the CID tables directory will be 
+		If a font variant has been specified, like "ABCD+Italic-Arial", then the CID tables directory will be
 		searched for the following files, in the following order :
 		- IDENTITY-H-ABCD+Italic-Arial.cid
 		- IDENTITY-H-ABCD+Italic.cid
@@ -7845,19 +7845,19 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
 	        Interface implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return (count($this->Map));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return (isset ($this->Map ['plain'] [$offset]));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (isset ($this->Map ['plain'] [$offset])) {
             $ch = $this->Map ['plain'] [$offset];
@@ -7941,7 +7941,7 @@ class PdfTexterIdentityHCIDMap extends PdfTexterCIDMap
 
 	Object references are of the form : "x y R", where "x" is the object number.
 
-	Of course, anything can be in any order, otherwise it would not be funny ! Consider the following 
+	Of course, anything can be in any order, otherwise it would not be funny ! Consider the following
 	example :
 
 		(1) 5 0 obj
@@ -7964,7 +7964,7 @@ class PdfTexterIdentityHCIDMap extends PdfTexterCIDMap
 
 	Of course, you cannot rely on the fact that all objects appear in logical order.
 
-	And, of course #2, there may be no page catalog at all ! in such cases, objects containing drawing 
+	And, of course #2, there may be no page catalog at all ! in such cases, objects containing drawing
 	instructions will have to be considered as a single page, whose number will be sequential.
 
 	And, of course #3, as this is the case with the official PDF 1.7 Reference from Adobe, there can be a
@@ -8005,11 +8005,11 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    CONSTRUCTOR
 		Creates a PdfTexterPageMap object. Actually, nothing significant is perfomed here, as this class' goal
 		is to be used internally by PdfTexter.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct()
     {
@@ -8018,23 +8018,23 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        AddTemplateObject - Adds an object that could be referenced as a template/
-	
+
 	    PROTOTYPE
 	        $pagemap -> AddTemplateObject ( $object_id, $object_text_data ) ;
-	
+
 	    DESCRIPTION
 	        Adds an object that may be referenced as a template from another text object, using the /TPLx notation.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the object that may contain a resource mapping entry.
 
 		$object_data (string) -
 			Object contents.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function AddTemplateObject($object_id, $object_text_data)
     {
@@ -8043,13 +8043,13 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetResourceMappings - Gets resource mappings specified after a /Resources parameter.
-	
+
 	    PROTOTYPE
 	        $result		=  $this -> GetResourceMappings ( $object_id, $object_data, $parameter, $pdf_object_list ) ;
-	
+
 	    DESCRIPTION
 	        Most of the time, objects containing a page description (/Type /Page) also contain a /Resources parameter,
 		which may be followed by one of the following constructs :
@@ -8059,7 +8059,7 @@ class PdfTexterPageMap extends PdfObjectBase
 			/Resources << /Font<</F1 10 0 R ...>> /XObject <</Im0 27 0 R ...>>
 		This method extracts alias/object mappings for the parameter specified by $parameter (it can be for
 		example 'Font' or 'Xobject') and returns these mappings as an associative array.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the object that may contain a resource mapping entry.
@@ -8072,17 +8072,17 @@ class PdfTexterPageMap extends PdfObjectBase
 
 		$pdf_object_list (associative array) -
 			Array of object id/object data associations, for all objects defined in the pdf file.
-	
+
 	    RETURN VALUE
 	        The list of resource mappings for the specified parameter, as an associative array, whose keys are the
 		resource aliases and values are the corresponding object ids.
 		The method returns an empty array if the specified object does not contain resource mappings or does
 		not contain the specified parameter.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function GetResourceMappings($object_id, $object_data, $parameter, $pdf_object_list)
     {
-        // The /Resources parameter refers to an existing PDF object 
+        // The /Resources parameter refers to an existing PDF object
         if (preg_match('#/Resources \s* (?P<object_id> \d+) \s+ \d+ \s+ R#ix', $object_data, $match)) {
             // Return the cached result if the same object has previously been referenced by a /Resources parameter
             if (isset ($this->ResourceMappingCache [$object_id] [$parameter]))
@@ -8131,16 +8131,16 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        Peek - Peeks page information from a pdf object.
-	
+
 	    PROTOTYPE
 	        $pagemap -> Peek ( ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves page information which can be of type (1), (2) or (3), as described in the class comments.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Id of the current pdf object.
@@ -8152,9 +8152,9 @@ class PdfTexterPageMap extends PdfObjectBase
 			Objects defined in the pdf file, as an associative array whose keys are object numbers and
 			values object data.
 			This parameter is used for /Type/Page objects which have a /Resource parameter that references
-			an existing object instead of providing font mappings and other XObject mappings inline, 
+			an existing object instead of providing font mappings and other XObject mappings inline,
 			enclosed within double angle brackets (<< /Font ... >>).
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function Peek($object_id, $object_data, $pdf_objects)
     {
@@ -8209,7 +8209,7 @@ class PdfTexterPageMap extends PdfObjectBase
                 $fonts = $this->GetResourceMappings($object_id, $object_data, '/Font', $pdf_objects);
                 $xobjects = $this->GetResourceMappings($object_id, $object_data, '/XObject', $pdf_objects);
 
-                // Find the width and height of the page (/Mediabox parameter) 
+                // Find the width and height of the page (/Mediabox parameter)
                 if (preg_match('#/MediaBox \s* \[ \s* (?P<x1> \d+) \s+ (?P<y1> \d+) \s+ (?P<x2> \d+) \s+ (?P<y2> \d+) \s* \]#imsx', $object_data, $match)) {
                     $width = ( double )($match ['x2'] - $match ['x1'] + 1);
                     $height = ( double )($match ['y2'] - $match ['y1'] + 1);
@@ -8226,7 +8226,7 @@ class PdfTexterPageMap extends PdfObjectBase
                 foreach ($references as $reference) {
                     // We just need to check that the object contains something like :
                     //	[x 0 R y 0 R ...]
-                    // and nothing more 
+                    // and nothing more
                     if (isset ($pdf_objects [$reference]) && preg_match('#^\s* \[ [^]]+ \]#x', $pdf_objects [$reference]) &&
                         $this->GetObjectReferences($reference, $pdf_objects [$reference], '', $nested_references)
                     )
@@ -8268,27 +8268,27 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        ProcessTemplateReferences - Replace template references with actual text contents.
-	
+
 	    PROTOTYPE
 	        $text		=  $pagemap -> ReplaceTemplateReferences ( $page_number, $text_data ) ;
-	
+
 	    DESCRIPTION
 	        Replaces template references of the form "/TPLx Do" with the actual text contents.
-	
+
 	    PARAMETERS
 	        $page_number (integer) -
 	                Page number of the object that contains the supplied object data.
 
 		$text_data (string)
 			Text drawing instructions that are to be processed.
-	
+
 	    RETURN VALUE
 	        Returns the original text, where all template references have been replaced with the contents of the
 		object they refer to.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function ProcessTemplateReferences($page_number, $text_data)
     {
@@ -8332,21 +8332,21 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        MapObjects - Builds a correspondance between object and page numbers.
-	
+
 	    PROTOTYPE
 	        $pagemap -> MapObjects ( ) ;
-	
+
 	    DESCRIPTION
-	        Builds a correspondance between object and page numbers. The page number corresponding to an object id 
+	        Builds a correspondance between object and page numbers. The page number corresponding to an object id
 		will after that be available using the array notation.
 
 	    NOTES
 		This method behaves as if there could be more than one page catalog in the same file, but I've not yet
 		encountered this case.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function MapObjects($objects)
     {
@@ -8378,28 +8378,28 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        MapKids - Establishes a correspondance between page kids and a current page number.
-	
+
 	    PROTOTYPE
 	        $pagemap -> MapObjects ( $catalog, &$page ) ;
-	
+
 	    DESCRIPTION
-	  	Tries to assign a page number to all page description objects that have been collected by the Peek() 
+	  	Tries to assign a page number to all page description objects that have been collected by the Peek()
 		method.
-	  	Also creates the Pages associative array, whose keys are page numbers and whose values are the ids of 
+	  	Also creates the Pages associative array, whose keys are page numbers and whose values are the ids of
 		the objects that the page contains.
-	  
-	    EXAMPLE 
-	  	The following example gives an overview of a possible layout for page catalogs ; it describes which 
-		objects contain	what. 
-	  	Lines starting with "#x", where "x" is a number, stands for a PDF object definition, which will start 
+
+	    EXAMPLE
+	  	The following example gives an overview of a possible layout for page catalogs ; it describes which
+		objects contain	what.
+	  	Lines starting with "#x", where "x" is a number, stands for a PDF object definition, which will start
 		with "x 0 obj" in the PDF file.
-	  	Whenever numbers are referenced (other than those prefixed with a "#"), it means "reference to the 
+	  	Whenever numbers are referenced (other than those prefixed with a "#"), it means "reference to the
 		specified object.
 	  	For example, "54" will refer to object #54, and will be given as "54 0 R" in the PDF file.
-	  	The numbers at the beginning of each line are just "step numbers", which will be referenced in the 
+	  	The numbers at the beginning of each line are just "step numbers", which will be referenced in the
 		explanations after the example :
 
 			(01) #1 : /Type/Catalog /Pages 54
@@ -8417,31 +8417,31 @@ class PdfTexterPageMap extends PdfObjectBase
 			(13)			    -> #42 : page contents
 
 		 Explanations :
-			(01) Object #1 contains the page catalog ; it states that a further description of the page 
+			(01) Object #1 contains the page catalog ; it states that a further description of the page
 			     contents is given by object #54.
 			     Note that it could reference multiple page descriptions, such as : /Pages [54 68 99...]
 			     (although I did not met the case so far)
-			(02) Object #54 in turn says that it as "kids", described by objects #3, #28, #32 and #58. It 
-			     also says that it has 5 pages (/Count parameter) ; but wait... the /Kids parameter references 
-			     4 objects while the /Count parameter states that we have 5 pages : what happens ? we will 
+			(02) Object #54 in turn says that it as "kids", described by objects #3, #28, #32 and #58. It
+			     also says that it has 5 pages (/Count parameter) ; but wait... the /Kids parameter references
+			     4 objects while the /Count parameter states that we have 5 pages : what happens ? we will
 			     discover it in the explanations below.
-			(03) Object #3 states that it is aimed for page description (/Type/Page) ; the page contents 
-			     will be found in object #26, specified after the /Contents parameter. Note that here again, 
-			     multiple objects could be referenced by the /Contents parameter but, in our case, there is 
-			     only one, 26. Object #3 also says that its parent object (in the page catalog) is object 
+			(03) Object #3 states that it is aimed for page description (/Type/Page) ; the page contents
+			     will be found in object #26, specified after the /Contents parameter. Note that here again,
+			     multiple objects could be referenced by the /Contents parameter but, in our case, there is
+			     only one, 26. Object #3 also says that its parent object (in the page catalog) is object
 			     #54, defined in (01).
 			     Since this is the first page we met, it will have page number 1.
 			(04) ... object #26 contains the Postscript instructions to draw page #1
 			(05) Object #28 has the same type as #3 ; its page contents can be located in object #30 (06)
 			     The same applies for object #32 (07), whose page contents are given by object #34 (08).
 			     So, (05) and (07) will be pages 2 and 3, respectively.
-			(09) Now, it starts to become interesting : object #58 does not directly lead to an object 
-			     containing Postscript instructions as did objects #3, #28 and #32 whose parent is #54, but 
-			     to yet another page catalog which contains 2 pages (/Count 2), described by objects #36 and 
+			(09) Now, it starts to become interesting : object #58 does not directly lead to an object
+			     containing Postscript instructions as did objects #3, #28 and #32 whose parent is #54, but
+			     to yet another page catalog which contains 2 pages (/Count 2), described by objects #36 and
 			     #40. It's not located at the same position as object #54 in the hierarchy, so it shows that
 			     page content descriptions can be recursively nested.
 			(10) Object #36 says that we will find the page contents in object #38 (which will be page 4)
-			(12) ... and object #40 says that we will find the page contents in object #42 (and our final 
+			(12) ... and object #40 says that we will find the page contents in object #42 (and our final
 			     page, 5)
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -8486,19 +8486,19 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetMappedFonts - Retrieves the mapped fonts per page
-	
+
 	    PROTOTYPE
 	        $array	=  $pagemap -> GetMappedFonts ( ) ;
-	
+
 	    DESCRIPTION
 	        Gets the mapped fonts, per page. XObjects are traversed, to retrieved additional font aliases defined
 		by them.
-		This function is used by the PdfTexter class to add additional entries to the FontMap object, 
+		This function is used by the PdfTexter class to add additional entries to the FontMap object,
 		ensuring that each reference to a font remains local to a page.
-	
+
 	    RETURN VALUE
 	        Returns an array of associative arrays which have the following entries :
 		- 'page' :
@@ -8510,7 +8510,7 @@ class PdfTexterPageMap extends PdfObjectBase
 			Font name (eg, "/F1", "/C1_0", etc.).
 		- 'object' :
 			Object defining the font attributes, such as character map, etc.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetMappedFonts()
     {
@@ -8579,23 +8579,23 @@ class PdfTexterPageMap extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        IsValidXObject - Checks if the specified object is a valid XObject.
-	
+
 	    PROTOTYPE
 	        $status		=  $pagemap -> IsValidXObjectName ( $name ) ;
-	
+
 	    DESCRIPTION
 	        Checks if the specified name is a valid XObject defining its own set of font aliases.
-	
+
 	    PARAMETERS
 	        $name (string) -
 	                Name of the XObject to be checked.
-	
+
 	    RETURN VALUE
 	        Returns true if the specified XObject exists and defines its own set of font aliases, false otherwise.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function IsValidXObjectName($name)
     {
@@ -8633,10 +8633,10 @@ abstract class PdfImage extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    CONSTRUCTOR
 	        Creates a PdfImage object with a resource that can be used with imagexxx() php functions.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($image_data, $no_resource_created = false)
     {
@@ -8650,10 +8650,10 @@ abstract class PdfImage extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    DESTRUCTOR
 	        Destroys the associated image resource.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __destruct()
     {
@@ -8662,17 +8662,17 @@ abstract class PdfImage extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        CreateImageResource - creates an image resource from the supplied image data.
-	
+
 	    PROTOTYPE
 	        $resource	=  $this -> CreateImageResource ( $data ) ;
-	
+
 	    DESCRIPTION
 	        Creates an image resource from the supplied image data.
 		Whatever the input format, the internal format will be the one used by the gd library.
-	
+
 	    PARAMETERS
 	        $data (string) -
 	                Image data.
@@ -8682,17 +8682,17 @@ abstract class PdfImage extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        DestroyImageResource - Destroys the allocated image resource.
-	
+
 	    PROTOTYPE
 	        $this -> DestroyImageResource ( ) ;
-	
+
 	    DESCRIPTION
-	        Destroys the allocated image resource, using the libgd imagedestroy() function. This method can be 
+	        Destroys the allocated image resource, using the libgd imagedestroy() function. This method can be
 		overridden by derived class if the underlying image resource does not come from the gd lib.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function DestroyImageResource()
     {
@@ -8702,23 +8702,23 @@ abstract class PdfImage extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        SaveAs - Saves the current image to a file.
-	
+
 	    PROTOTYPE
 	        $pdfimage -> SaveAs ( $output_file, $image_type = IMG_JPEG ) ;
-	
+
 	    DESCRIPTION
 	        Saves the current image resource to the specified output file, in the specified format.
-	
+
 	    PARAMETERS
 	        $output_file (string) -
 	                Output filename.
 
 		$image_type (integer) -
 			Output format. Can be any of the predefined php constants IMG_*.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function SaveAs($output_file, $image_type = IMG_JPEG)
     {
@@ -8856,16 +8856,16 @@ class PdfInlinedImage extends PdfImage
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        Constructor - Builds an image from the supplied data.
-	
+
 	    PROTOTYPE
 	        $image	=  new  PdfInlinedImage ( $image_data, $width, $height, $bits_per_component, $color_scheme ) ;
-	
+
 	    DESCRIPTION
 	        Builds an image from the supplied data. Checks that the image flags are supported.
-	
+
 	    PARAMETERS
 	        $image_data (string) -
 	                Uncompressed image data.
@@ -8879,12 +8879,12 @@ class PdfInlinedImage extends PdfImage
 		$bits_per_components (integer) -
 			Number of bits per color component.
 
-		$color_scheme (integer) - 
+		$color_scheme (integer) -
 			One of the COLOR_SCHEME_* constants, specifying the initial data format.
-	
+
 	    NOTES
 	        Processed images are always converted to JPEG format.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($image_data, $width, $height, $bits_per_component, $color_scheme)
     {
@@ -8908,13 +8908,13 @@ class PdfInlinedImage extends PdfImage
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        CreateInstance - Creates an appropriate instance of a PdfImage class.
-	
+
 	    PROTOTYPE
 	        $image	=  PdfInlinedImage ( $stream_data, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Creates an instance of either :
 		- A PdfJpegImage class, if the image specifications in $object_data indicate that the compressed stream
@@ -8926,22 +8926,22 @@ class PdfInlinedImage extends PdfImage
 		- Pure JPEG contents
 		- RGB values
 		- CMYK values
-		- Gray scale values (in the current version, the resulting image does not correctly reproduce the 
+		- Gray scale values (in the current version, the resulting image does not correctly reproduce the
 		  initial colors, if interpolation is to be used).
-	
+
 	    PARAMETERS
 	        $stream_data (string) -
 	                Compressed image data.
 
 		$object_data (string) -
 			Object containing the stream data.
-	
+
 	    RETURN VALUE
 	        Returns :
 		- A PdfJpegImage object, if the stream data contains only pure JPEG contents
 		- A PdfInlinedImage object, in other cases.
 		- False if the supplied image data is not currently supported.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function CreateInstance($stream_data, $object_data, $autosave)
     {
@@ -9022,25 +9022,25 @@ class PdfInlinedImage extends PdfImage
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        CreateImageResource - Creates the image resource.
-	
+
 	    PROTOTYPE
 	        $resource	=  $image -> CreateImageResource ( $image_data ) ;
-	
+
 	    DESCRIPTION
 	        Creates a GD image according to the supplied image data, and the parameters supplied to the class
 		constructor.
-	
+
 	    PARAMETERS
 	        $image_data (string) -
 	                Image to be decoded.
-	
+
 	    RETURN VALUE
 	        Returns a GD graphics resource in true color, or false if there is currently no implemented decoding
 		function for this kind of images.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function CreateImageResource($image_data)
     {
@@ -9054,7 +9054,7 @@ class PdfInlinedImage extends PdfImage
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Decoding functions.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -9181,7 +9181,7 @@ class PdfInlinedImage extends PdfImage
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Support functions.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -9267,31 +9267,31 @@ class PdfEncryptionData extends PdfObjectBase
     // Permission bits for encrypted files. Comments come from the PDF specification
     const        PDFPERM_PRINT = 0x0004;        // bit 3 :
     //	(Revision 2) Print the document.
-    //	(Revision 3 or greater) Print the document (possibly not at the highest quality level, 
+    //	(Revision 3 or greater) Print the document (possibly not at the highest quality level,
     //	depending on whether bit 12 is also set).
     const        PDFPERM_MODIFY = 0x0008;        // bit 4 :
     //	Modify the contents of the document by operations other than those controlled by bits 6, 9, and 11.
     const        PDFPERM_COPY = 0x0010;        // bit 5 :
-    //	(Revision 2) Copy or otherwise extract text and graphics from the document, including extracting text 
+    //	(Revision 2) Copy or otherwise extract text and graphics from the document, including extracting text
     //	and graphics (in support of accessibility to users with disabilities or for other purposes).
-    //	(Revision 3 or greater) Copy or otherwise extract text and graphics from the document by operations  
+    //	(Revision 3 or greater) Copy or otherwise extract text and graphics from the document by operations
     //	other than that controlled by bit 10.
     const        PDFPERM_MODIFY_EXTRA = 0x0020;        // bit 6 :
-    //	Add or modify text annotations, fill in interactive form fields, and, if bit 4 is also set, 
+    //	Add or modify text annotations, fill in interactive form fields, and, if bit 4 is also set,
     //	create or modify interactive form fields (including signature fields).
     const        PDFPERM_FILL_FORM = 0x0100;        // bit 9 :
-    //	(Revision 3 or greater) Fill in existing interactive form fields (including signature fields), 
+    //	(Revision 3 or greater) Fill in existing interactive form fields (including signature fields),
     //	even if bit 6 is clear.
     const        PDFPERM_EXTRACT = 0x0200;        // bit 10 :
-    //	(Revision 3 or greater) Fill in existing interactive form fields (including signature fields), 
+    //	(Revision 3 or greater) Fill in existing interactive form fields (including signature fields),
     //	even if bit 6 is clear.
     const        PDFPERM_ASSEMBLE = 0x0400;        // bit 11 :
-    //	(Revision 3 or greater) Assemble the document (insert, rotate, or delete pages and create bookmarks 
+    //	(Revision 3 or greater) Assemble the document (insert, rotate, or delete pages and create bookmarks
     //	or thumbnail images), even if bit 4 is clear.
     const        PDFPERM_HIGH_QUALITY_PRINT = 0x0800;        // bit 12 :
-    //	(Revision 3 or greater) Print the document to a representation from which a faithful digital copy of 
-    //	the PDF content could be generated. When this bit is clear (and bit 3 is set), printing is limited to 
-    //	a low-level representation of the appearance, possibly of degraded quality. 
+    //	(Revision 3 or greater) Print the document to a representation from which a faithful digital copy of
+    //	the PDF content could be generated. When this bit is clear (and bit 3 is set), printing is limited to
+    //	a low-level representation of the appearance, possibly of degraded quality.
 
     public $FileId;                            // File ID, as specified by the /ID flag
     public $ObjectId;                            // Object id and text contents
@@ -9451,16 +9451,16 @@ class PdfEncryptionData extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetInstance - Creates an instance of a PdfEncryptionData object.
-	
+
 	    PROTOTYPE
 	        $obj		=  PdfEncryptionData::GetInstance ( $object_id, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Returns an instance of encryption data
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function GetInstance($file_id, $object_id, $object_data)
     {
@@ -9487,26 +9487,26 @@ class PdfEncryptionData extends PdfObjectBase
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        Decrypt - Decrypts object data.
-	
+
 	    PROTOTYPE
 	        $data		=  $this -> Decrypt ( $object_id, $object_data ) ;
-	
+
 	    DESCRIPTION
 	        Decrypts object data, when the PDF file is password-protected.
-	
+
 	    PARAMETERS
 	        $object_id (integer) -
 	                Pdf object number.
 
 		$object_data (string) -
 			Object data.
-		
+
 	    RETURN VALUE
 	        Returns the decrypted object data, or false if the encrypted object could not be decrypted.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function Decrypt(/** @noinspection PhpUnusedParameterInspection */
         $object_id, $object_data)
@@ -9700,7 +9700,7 @@ class FormDefinitions implements \ArrayAccess, \Countable, \IteratorAggregate
 
 	    Constructor -
 		Parses the supplied XML template.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($xml_data, $pdf_xml_data)
     {
@@ -9829,37 +9829,37 @@ class FormDefinitions implements \ArrayAccess, \Countable, \IteratorAggregate
 		Interfaces implementations to retrieve form definitions.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return (count($this->Definitions));
     }
 
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return (new \ArrayIterator ($this->Definitions));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return ($offset >= 0 && $offset < count($this->Definitions));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return ($this->Definitions [$offset]);
     }
 
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new PTTException ("Unsupported operation."));
     }
 
 
-    public function offsetunset($offset)
+    public function offsetUnset($offset): void
     {
         error(new PTTException ("Unsupported operation."));
     }
@@ -9899,7 +9899,7 @@ class FormDefinition        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Analyze the contents of an XML template form definition.
 
@@ -10013,20 +10013,20 @@ class FormDefinition        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetClassDefinition - Returns the class definition for the urrent form.
-	
+
 	    PROTOTYPE
 	        $def	=   $form_def -> GetClassDefinition ( ) ;
-	
+
 	    DESCRIPTION
 	        Returns a string containing the PHP class definition that will contain the properties defined in the XML
 		form template.
-	
+
 	    RETURN VALUE
 	        Returns a string containing the PHP class definition for the current form.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetClassDefinition()
     {
@@ -10056,7 +10056,7 @@ class FormDefinition        // extends  Object
             }
         }
 
-        // First, write out the constant definitions 
+        // First, write out the constant definitions
         $all_constants = array();
 
         foreach ($this->FieldDefinitions as $def) {
@@ -10117,25 +10117,25 @@ class FormDefinition        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetFormData - Returns a form data object containing properties mapped to the form data.
-	
+
 	    PROTOTYPE
 	        $object		=  $form_def -> GetFormData ( $fields ) ;
-	
+
 	    DESCRIPTION
 	        Returns an object containing properties mapped to actual form data.
-	
+
 	    PARAMETERS
 	        $fields (array) -
 	                An associative array whoses keys are the PDF form field names, and values their values as stored
 			in the PDF file.
-	
+
 	    RETURN VALUE
 	        Returns an object of the class, as defined by the template specified to PdfToTextFormDefinitions
 		class constructor.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetFormData($fields = array())
     {
@@ -10159,7 +10159,7 @@ class FormDefinition        // extends  Object
 
 
     // __process_field_values -
-    //	Translates html entities and removes carriage returns (which are apparently used for multiline field) to 
+    //	Translates html entities and removes carriage returns (which are apparently used for multiline field) to
     //	replace them with newlines.
     private function __process_field_value($value)
     {
@@ -10183,31 +10183,31 @@ class FormDefinition        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetformDataFromPdfObject - Same as GetFormData(), except that it operates on XML data.
-	
+
 	    PROTOTYPE
 	        $object		=  $pdf -> GetFormDataFromPdfObject ( $pdf_data ) ;
-	
+
 	    DESCRIPTION
 	        Behaves the same as GetFormData(), except that it takes as input the XML contents of a PDF object.
-	
+
 	    PARAMETERS
 	        $pdf_data (string) -
 	                XML data coming from the PDF file.
-	
+
 	    RETURN VALUE
 	        Returns an object of the class, as defined by the template specified to PdfToTextFormDefinitions
 		class constructor.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function GetFormDataFromPdfObject($pdf_data)
     {
         // simplexml_ functions do not like tags that contain a colon - replace them with a dash
         $pdf_data = preg_replace('/(<[^:]+?)(:)/', '$1-', $pdf_data);
 
-        // Load the xml data 
+        // Load the xml data
         $xml = simplexml_load_string($pdf_data);
 
         // Get the form field values
@@ -10312,7 +10312,7 @@ class FormFieldDefinition    // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Builds the field definition object.
 
@@ -10440,7 +10440,7 @@ class FormFieldDefinition    // extends  Object
 
   ==============================================================================================================*/
 
-class FormData        // extends  Object 
+class FormData        // extends  Object
 {
     // Doc comments provide information about form data fields (mainly to handle grouped field values)
     // The $__Properties array gives information about the form data fields themselves
@@ -10448,7 +10448,7 @@ class FormData        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Retrieve information about the derived class properties, which are specified by the derived class
 		generated on the fly.
@@ -10508,7 +10508,7 @@ class FormData        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    __get -
 		Returns the underlying property value for this PDF data field.
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -10522,7 +10522,7 @@ class FormData        // extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    __set -
 		Sets the underlying property value for this PDF data field.
 		When the property is a compound one, sets individual members as well.
@@ -10608,15 +10608,15 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
     // Shape field names - used for iteration
     private $ShapeNames;
 
-    // Page count 
+    // Page count
     private $PageCount = false;
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    CONSTRUCTOR -
 		Analyzes the XML data defining the areas to be captured.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($xml_data)
     {
@@ -10664,24 +10664,24 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetCapturedObject - Creates an object reflecting the captured data.
-	
+
 	    PROTOTYPE
 	        $captures	=  $capture_definitions -> GetCapturedObject ( $document_fragments ) ;
-	
+
 	    DESCRIPTION
 	        Returns an object of type CapturedData,containing the data that has been captured, based on
 		the capture definitions.
-	
+
 	    PARAMETERS
 	        $document_fragments (type) -
 	                Document text fragments collected during the text layout rendering process.
-	
+
 	    RETURN VALUE
 	        An object of type Captures, cntaining the captured data.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetCapturedObject($document_fragments)
     {
@@ -10703,24 +10703,24 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        SetPageCount - Defines the total number of pages in the document.
-	
+
 	    PROTOTYPE
 	        $shape -> SetPageCount ( $count ) ;
-	
+
 	    DESCRIPTION
-	        At the time when XML definitions are processed, the total number of pages in the document is not yet 
-		known. Moreover, page ranges or page numbers can be expressed relative to the last page of the 
+	        At the time when XML definitions are processed, the total number of pages in the document is not yet
+		known. Moreover, page ranges or page numbers can be expressed relative to the last page of the
 		document (for example : 1..$-1, which means "from the first page to the last page - 1).
 		Setting the page count once it is known allows to process the expressions specified in the "number"
 		attribute of the <pages> tag so that the expressions are transformed into actual page numbers.
-	
+
 	    PARAMETERS
 	        $count (integer) -
 	                Number of pages in the document.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function SetPageCount($count)
     {
@@ -10734,33 +10734,33 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetNodeAttributes - Retrieves an XML node's attributes.
-	
+
 	    PROTOTYPE
 	        $result		=  CaptureDefinitions::GetNodeAttributes ( $node, $attributes ) ;
-	
+
 	    DESCRIPTION
 	        Retrieves the attributes defined for the specified XML node.
-	
+
 	    PARAMETERS
 	        $node (\SimpleXMLElement) -
 	                Node whose attributes are to be extracted.
 
 		$attributes (associative array) -
-			Associative array whose keys are the attribute names and whose values define a boolean 
+			Associative array whose keys are the attribute names and whose values define a boolean
 			indicating whether the attribute is mandatory or not.
-	
+
 	    RETURN VALUE
 	        Returns an associative whose key are the attribute names and whose values are the attribute values,
 		specified as a string.
 		For optional unspecified attributes, the value will be boolean false.
-	
+
 	    NOTES
 	        The method throws an exception if the node contains an unknown attribute, or if a mandatory attribute
 		is missing.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function GetNodeAttributes(\SimpleXMLElement $node, $attributes)
     {
@@ -10796,28 +10796,28 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        GetBooleanAttribute - Returns a boolean value associated to a string.
-	
+
 	    PROTOTYPE
 	        $bool	=  CaptureDefinitions::GetBooleanValue ( $value ) ;
-	
+
 	    DESCRIPTION
 	        Returns a boolean value corresponding to a boolean specified as a string.
-	
+
 	    PARAMETERS
 	        $value (string) -
-	                A boolean value represented as a string. 
+	                A boolean value represented as a string.
 			The strings 'true', 'yes', 'on' and '1' will be interpreted as boolean true.
 			The strings 'false', 'no', 'off' and '0' will be interpreted as boolean false.
-	
+
 	    RETURN VALUE
 	        The boolean value corresponding to the specified string.
-	
+
 	    NOTES
 	        An exception is thrown if the supplied string is incorrect.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public static function GetBooleanAttribute($value)
     {
@@ -10833,38 +10833,38 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Interfaces implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
 
     // Countable interface
-    public function count()
+    public function count(): int
     {
         return (count($this->ShapeDefinitions));
     }
 
 
     // ArrayAccess interface
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return (isset ($this->ShapeDefinitions [$offset]));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return ($this->ShapeDefinitions [$offset]);
     }
 
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new PTTException ("Unsupported operation"));
     }
 
 
-    public function offsetunset($offset)
+    public function offsetUnset($offset): void
     {
         error(new PTTException ("Unsupported operation"));
     }
@@ -10874,27 +10874,27 @@ class CaptureDefinitions implements \ArrayAccess, \Countable, \Iterator
     //	Iteration is made through shape names, which are supplied by the $ShapeNames property
     private $__iterator_index = 0;
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->__iterator_index = 0;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return ($this->__iterator_index >= 0 && $this->__iterator_index < count($this->ShapeNames));
     }
 
-    public function key()
+    public function key(): mixed
     {
         return ($this->ShapeNames [$this->__iterator_index]);
     }
 
-    public function next()
+    public function next(): void
     {
         $this->__iterator_index++;
     }
 
-    public function current()
+    public function current(): mixed
     {
         return ($this->ShapeDefinitions [$this->ShapeNames [$this->__iterator_index]]);
     }
@@ -10927,7 +10927,7 @@ abstract class CaptureShapeDefinition        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     Constructor -
 		Initializes the base capture class.
 
@@ -10940,7 +10940,7 @@ abstract class CaptureShapeDefinition        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     SetPageCount -
 		Sets the page count, so that all the applicable pages can be determined.
 		Derived classes can implement this function if some additional work is needed.
@@ -10953,7 +10953,7 @@ abstract class CaptureShapeDefinition        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     GetFragmentData -
 		Extracts data from a text fragment (text + coordinates).
 
@@ -10969,7 +10969,7 @@ abstract class CaptureShapeDefinition        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     GetAttributes -
 		Retrieves the attributes of the given XML node. Processes the following attributes, which are common to
 		all shapes :
@@ -10991,7 +10991,7 @@ abstract class CaptureShapeDefinition        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     ExtractAreas -
 		Extracts text contents from the document fragments.
 
@@ -11010,11 +11010,11 @@ abstract class CaptureShapeDefinition        //extends  Object
 class CaptureRectangleDefinition extends CaptureShapeDefinition
 {
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    CONSTRUCTOR -
 		Analyzes the contents of a <rectangle> XML node, which contains <page> child node giving the
 		applicable pages and the rectangle dimensions.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct(\SimpleXMLElement $node)
     {
@@ -11062,7 +11062,7 @@ class CaptureRectangleDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     ExtractAreas -
 		Extracts text contents from the document fragments.
 
@@ -11089,7 +11089,7 @@ class CaptureRectangleDefinition extends CaptureShapeDefinition
                     // Normally, rectangle shapes are used to capture a single line...
                     if (!isset ($result [$page]))
                         $result [$page] = new CapturedRectangle ($page, $this->Name, $text, $left, $top, $right, $bottom, $this);
-                    // ... but you can also use them to capture multiple lines ; in this case, the "separator" attribute of the <rectangle> tag will 
+                    // ... but you can also use them to capture multiple lines ; in this case, the "separator" attribute of the <rectangle> tag will
                     // be used to separate items
                     else {
                         $existing_area = $result [$page];
@@ -11124,7 +11124,7 @@ class CaptureRectangleDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     SetPageCount -
 		Ensures that an Area is created for each related page.
 
@@ -11160,12 +11160,12 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    CONSTRUCTOR -
 		Analyzes the contents of a <columns> XML node, which contains <page> nodes giving a part of the column
 		dimensions, and <column> nodes which specify the name of the column and the remaining coordinates,
 		such as "left" or "width"
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct(\SimpleXMLElement $node)
     {
@@ -11180,7 +11180,7 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
             $tag_name = $child->getName();
 
             switch (strtolower($tag_name)) {
-                // <page> tag 
+                // <page> tag
                 case    'page' :
                     // Retrieve the specified attributes
                     $page_attributes = CaptureDefinitions::GetNodeAttributes
@@ -11266,7 +11266,7 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     ExtractAreas -
 		Extracts text contents from the document fragments.
 
@@ -11380,7 +11380,7 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
                     $line_bottom = $columns_line [$this->ColumnNames [$last]]->Bottom;
                 }
 
-                // Create a CaptureLine entry 
+                // Create a CaptureLine entry
                 $final_lines [] = new CapturedLine ($page, $this->Name, $columns_line, $line_left, $line_top, $line_right, $line_bottom, $this);
             }
 
@@ -11394,7 +11394,7 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	     SetPageCount -
 		Extracts text contents from the document fragments.
 
@@ -11422,7 +11422,7 @@ class CaptureLinesDefinition extends CaptureShapeDefinition
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Support functions.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -11464,14 +11464,14 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
     /*--------------------------------------------------------------------------------------------------------------
 	    NAME
 	        Add - Add a page number(s) definition.
-	
+
 	    PROTOTYPE
 	        $applicable_pages -> Add ( $page_number ) ;
-	
+
 	    DESCRIPTION
 	        Add the page number(s) specified by the "number" attribute of the <pages> tag to the list of applicable
 		pages.
-	
+
 	    PARAMETERS
 	        $page_number (string) -
 	                A string defining which pages are applicable. This can be a single page number :
@@ -11491,7 +11491,7 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
 				<page number="1, $-9..$" .../>
 
 			means : "applicable pages are 1, plus the last ten pages f the document".
-		
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function Add($page_number, $extra_data = false)
     {
@@ -11501,13 +11501,13 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
     /*--------------------------------------------------------------------------------------------------------------
 	    NAME
 	        SetPageCount - Sets the total number of pages in the document.
-	
+
 	    PROTOTYPE
 	        $applicable_pages -> SetPageCount ( $count ) ;
-	
+
 	    DESCRIPTION
 	        Sets the total number of pages in the document and builds a map of which pages are applicable or not.
-	
+
 	    PARAMETERS
 	        $count (integer) -
 	                Total number of pages in the document.
@@ -11565,38 +11565,38 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Interfaces implementations.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
 
     // Countable interface
-    public function count()
+    public function count(): int
     {
         return (count($this->PageMap));
     }
 
 
     // Array access interface
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return (isset ($this->PageMap [$offset]));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return ((isset ($this->PageMap [$offset])) ? true : false);
     }
 
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new PTTException ("Unsupported operation"));
     }
 
 
-    public function offsetunset($offset)
+    public function offsetUnset($offset): void
     {
         error(new PTTException ("Unsupported operation"));
     }
@@ -11605,38 +11605,38 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
     // Iterator interface
     private $__iterator_value = 1;
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->__iterator_value = 1;
     }
 
 
-    public function valid()
+    public function valid(): bool
     {
         return ($this->__iterator_value >= 1 && $this->__iterator_value <= $this->PageCount);
     }
 
 
-    public function key()
+    public function key(): mixed
     {
         return ($this->__iterator_value);
     }
 
 
-    public function next()
+    public function next(): void
     {
         $this->__iterator_value++;
     }
 
 
-    public function current()
+    public function current(): mixed
     {
         return ((isset ($this->PageMap [$this->__iterator_value])) ? true : false);
     }
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Helper functions.
 
 	 *-------------------------------------------------------------------------------------------------------------*/
@@ -11691,7 +11691,7 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
 
 
     // __check_expression -
-    //	Checks that a syntactically correct 
+    //	Checks that a syntactically correct
     private function __check_expression($str, $count = 1)
     {
         $new_str = str_replace('$', $count, $str);
@@ -11705,12 +11705,12 @@ class CaptureApplicablePages implements \ArrayAccess, \Countable, \Iterator
 /*==============================================================================================================
 
     class CaptureArea -
-        A capture area describes a rectangle, either by its top, left, right and bottom coordinates, or by 
+        A capture area describes a rectangle, either by its top, left, right and bottom coordinates, or by
 	its top/left coordinates, and its width and height.
 
   ==============================================================================================================*/
 
-class CaptureArea    //extends  Object 
+class CaptureArea    //extends  Object
 {
     // List of authorzed keyword for defining the rectangle dimensions
     static private $Keys = array('left', 'top', 'right', 'bottom', 'width', 'height');
@@ -11726,16 +11726,16 @@ class CaptureArea    //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        Constructor
-	
+
 	    PROTOTYPE
 	        $area	=  new CaptureArea ( $area, $default_area = null, $name = '' ) ;
-	
+
 	    DESCRIPTION
 	        Initialize an area (a rectangle) using the supplied coordinates
-	
+
 	    PARAMETERS
 	        $area (array) -
 	                An associative array that may contain the following entries :
@@ -11766,10 +11766,10 @@ class CaptureArea    //extends  Object
 
 		$name (string) -
 			An optional name for this area. This information is not used by the class.
-	
+
 	    NOTES
 	        Coordinate (0,0) is located at the left bottom of the page.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($area, $default_area = null, $name = '')
     {
@@ -11834,10 +11834,10 @@ class CaptureArea    //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        __get, __set - Implement the Width and Height properties.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __get($member)
     {
@@ -11888,10 +11888,10 @@ class CaptureArea    //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    NAME
 	        Contains - Check if this area contains the specified rectangle.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function Contains($left, $top, $right, $bottom)
     {
@@ -11916,13 +11916,13 @@ class CaptureArea    //extends  Object
  **************************************************************************************************************
  **************************************************************************************************************/
 /*==============================================================================================================
- 
+
      class CapturedText -
          Base class for captured text enclosed by shapes.
- 
+
    ==============================================================================================================*/
 
-abstract class CapturedText        //extends  Object 
+abstract class CapturedText        //extends  Object
 {
     // Shape name (as specified by the "name" attribute of the <rectangle> or <lines> tags, for example)
     public $Name;
@@ -11942,7 +11942,7 @@ abstract class CapturedText        //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Initializes a captured text object, whatever the original shape.
 
@@ -11963,10 +11963,10 @@ abstract class CapturedText        //extends  Object
 
 
 /*==============================================================================================================
- 
+
      class CapturedRectangle -
          Implements a text captured by a rectangle shape.
- 
+
    ==============================================================================================================*/
 
 class CapturedRectangle extends CapturedText
@@ -11985,11 +11985,11 @@ class CapturedRectangle extends CapturedText
 
 
 /*==============================================================================================================
- 
+
      class CapturedColumn -
          Implements a text captured by a lines/column shape.
 	 Actually behaves like the CapturedRectangle class
- 
+
    ==============================================================================================================*/
 
 class CapturedColumn extends CapturedText
@@ -12008,10 +12008,10 @@ class CapturedColumn extends CapturedText
 
 
 /*==============================================================================================================
- 
+
      class CapturedLine -
          Implements a text captured by a lines shape.
- 
+
    ==============================================================================================================*/
 
 class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -12023,12 +12023,12 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Builds a Line object based on the supplied columns.
-		Also builds the Text property, which contains the columns text separated by the separator string 
+		Also builds the Text property, which contains the columns text separated by the separator string
 		specified in the XML definition.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($page, $name, $columns, $left, $top, $right, $bottom, $definition)
     {
@@ -12050,10 +12050,10 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    __get -
 		Returns access to a column by its name.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __get($member)
     {
@@ -12065,23 +12065,23 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Interfaces implementations.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return ($this->Columns);
     }
 
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return (new \ArrayIterator ($this->Columns));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         if (is_numeric($offset))
             return ($offset >= 0 && $offset < count($this->Columns));
@@ -12090,7 +12090,7 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if (is_numeric($offset))
             return ($this->Columns [$offset]);
@@ -12099,13 +12099,13 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
     }
 
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
 
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
@@ -12113,10 +12113,10 @@ class CapturedLine extends CapturedText implements \ArrayAccess, \Countable, \It
 
 
 /*==============================================================================================================
- 
+
      class CapturedLines -
          Implements a set of lines.
- 
+
    ==============================================================================================================*/
 
 class CapturedLines implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -12132,10 +12132,10 @@ class CapturedLines implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Instantiates a CapturedLines object.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($name, $page, $lines)
     {
@@ -12146,42 +12146,42 @@ class CapturedLines implements \ArrayAccess, \Countable, \IteratorAggregate
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 		Interfaces implementations.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return ($this->Lines);
     }
 
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return (new \ArrayIterator ($this->Lines));
     }
 
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return ($offset >= 0 && $offset < count($this->Lines));
     }
 
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         /** @noinspection PhpUndefinedFieldInspection */
         return ($this->Captures [$offset]);
     }
 
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
 
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
@@ -12216,10 +12216,10 @@ class Captures            //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Instantiates a Captures object.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($captures)
     {
@@ -12234,10 +12234,10 @@ class Captures            //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    ToCaptures -
 		Returns a simplified view of captured objects, with only name/value pairs.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function ToCaptures()
     {
@@ -12278,10 +12278,10 @@ class Captures            //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    __get -
 		Retrieves the captured objects by their name, as specified in the XML definition.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __get($member)
     {
@@ -12299,10 +12299,10 @@ class Captures            //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    GetCapturedObjectsByName -
 		Returns an associative array of the captured shapes, indexed by their name.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function GetCapturedObjectsByName()
     {
@@ -12311,10 +12311,10 @@ class Captures            //extends  Object
 
 
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    GetCaptureInstance -
 		Returns an object inheriting from the Capture class, that wraps the capture results.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     protected function GetCaptureInstance($fieldname)
     {
@@ -12360,32 +12360,32 @@ class Capture implements \ArrayAccess, \Countable, \IteratorAggregate
     /*--------------------------------------------------------------------------------------------------------------
 		Interfaces implementations.
 	 *-------------------------------------------------------------------------------------------------------------*/
-    public function count()
+    public function count(): int
     {
         return ($this->Captures);
     }
 
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return (new \ArrayIterator ($this->Captures));
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return ($offset >= 0 && $offset < count($this->Captures));
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return ($this->Captures [$offset]);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         error(new CaptureException ("Unsupported operation."));
     }
@@ -12427,10 +12427,10 @@ class LinesCapture extends Capture
 class RectangleCapture extends Capture
 {
     /*--------------------------------------------------------------------------------------------------------------
-	
+
 	    Constructor -
 		Builds an object array indexed by page number.
-	
+
 	 *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($objects)
     {
