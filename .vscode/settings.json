@@ -1,0 +1,16 @@
+{
+  "intelephense.environment.phpVersion": "8.2",
+  "files.associations": {
+    "*.neon": "yaml"
+  },
+  "github.codespaces.defaultExtensions": [
+    "github.copilot",
+    "valeryanm.vscode-phpsab",
+  ],
+  "intelephense.environment.includePaths": [
+    "vendor",
+    ".vscode/stubs"
+  ],
+  "phpsab.executablePathCS": "vendor/bin/phpcs",
+  "phpsab.executablePathCBF": "vendor/bin/phpcbf"
+}

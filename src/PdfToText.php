@@ -629,6 +629,11 @@ class PdfToText extends PdfObjectBase
         return ($this->__load('', $contents, $user_password, $owner_password));
     }
 
+    private function utf8_encode($str)
+    {
+        return mb_convert_encoding($str, 'UTF-8', 'ISO-8859-1');
+    }
+
 
     private function __load(
         $filename,
@@ -1082,7 +1087,7 @@ class PdfToText extends PdfObjectBase
 
         // Build the page locations (ie, starting and ending offsets)
         $offset = 0;
-        $page_separator = utf8_encode($this->PageSeparator);
+        $page_separator = $this->utf8_encode($this->PageSeparator);
         $page_separator_length = strlen($page_separator);
 
         foreach ($this->Pages as $page_number => &$page) {
@@ -4698,7 +4703,7 @@ class PdfToText extends PdfObjectBase
                 $padding = $this->Separator;
             }
 
-            return (utf8_encode(self::Unescape($padding)));
+            return ($this->utf8_encode(self::Unescape($padding)));
         } else {
             return ('');
         }

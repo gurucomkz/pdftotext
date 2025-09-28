@@ -22,13 +22,19 @@
         }
     },
     "scripts": {
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/phpunit"
+        ],
         "stan": [
             "Composer\\Config::disableProcessTimeout",
             "./vendor/bin/phpstan analyze --memory-limit=1G"
         ]
     },
     "require-dev": {
-        "phpstan/phpstan": "2.1.x-dev"
+        "phpstan/phpstan": "2.1.x-dev",
+        "squizlabs/php_codesniffer": "4.x-dev",
+        "phpunit/phpunit": "^12.4@dev"
     },
     "minimum-stability": "dev"
 }

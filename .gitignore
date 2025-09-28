@@ -4,3 +4,5 @@
 .github/instructions/codacy.instructions.md
 vendor
 composer.lock
+coverage
+.phpunit.result.cache

@@ -1,4 +1,5 @@
 <?php
+	require '../../vendor/autoload.php';
 	use VanXuan\PdfToText\PdfToText;
 
 	function  output ( $message )
