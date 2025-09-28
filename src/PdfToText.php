@@ -4708,7 +4708,7 @@ class PdfToText extends PdfObjectBase
         static $suffixes =
         [
             IMG_JPEG => 'jpg',
-            IMG_JPG => 'jpg',
+            // IMG_JPG => 'jpg', // duplicate
             IMG_GIF => 'gif',
             IMG_PNG => 'png',
             IMG_WBMP => 'wbmp',

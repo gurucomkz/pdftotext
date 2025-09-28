@@ -93,9 +93,7 @@ abstract class PdfTexterCIDMap extends PdfTexterCharacterMap
                         include($file);
                     }
 
-                    if (isset($map)) {
-                        self::$CachedMaps [$map_index] = ['file' => $file, 'map' => $map];
-                    }
+                    self::$CachedMaps [$map_index] = ['file' => $file, 'map' => $map];
                 } elseif (PdfToText::$DEBUG) {
                     warning(new DecodingException("CID \"$file\" does not contain any definition."));
                 }

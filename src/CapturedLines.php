@@ -60,7 +60,7 @@ class CapturedLines implements \ArrayAccess, \Countable, \IteratorAggregate
     public function offsetGet($offset): mixed
     {
         /** @noinspection PhpUndefinedFieldInspection */
-        return ($this->Captures [$offset]);
+        return ($this->Lines [$offset]);
     }
 
 
