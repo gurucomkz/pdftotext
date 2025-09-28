@@ -3,7 +3,7 @@ parameters:
     # ignoreErrors:
     parallel:
         maximumNumberOfProcesses: 2
-    level: 1
+    level: 2
     paths:
         - src
     scanDirectories:

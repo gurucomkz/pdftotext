@@ -2272,6 +2272,9 @@ class PdfToText extends PdfObjectBase
 
         // Extract the series of object id/offset pairs and the stream object data
         $series = explode(' ', rtrim(preg_replace('/\s+/', ' ', $series_match ['series'])));
+
+        /** @var int[] */
+        $series = array_map('intval', $series);
         $data = substr($decoded_data, strlen($series_match ['series']));
 
         // $series should contain an even number of values
@@ -4400,13 +4403,14 @@ class PdfToText extends PdfObjectBase
     //  Returns the font object associated with this fragment
     private function __compute_fragment_width(&$fragment)
     {
-        /** @var PdfTexterFont $font_object */
         // To avoid repeated calls to the PdfTexterFontTable::GetFontObject() method, we are buffering them in the FontObjectsBuffer property.
         $object_reference = $fragment ['page'] . ':' . $fragment ['template'] . ':' . $fragment ['font'];
-
+        
         if (isset($this->FontObjectsBuffer [$object_reference])) {
+            /** @var PdfTexterFont $font_object */
             $font_object = $this->FontObjectsBuffer [$object_reference];
         } else {
+            /** @var PdfTexterFont $font_object */
             $font_object = $this->FontTable->GetFontObject($fragment ['page'], $fragment ['template'], $fragment ['font']);
             $this->FontObjectsBuffer [$object_reference] = $font_object;
         }
