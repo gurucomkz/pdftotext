@@ -1,0 +1,10 @@
+parameters:
+    treatPhpDocTypesAsCertain: false
+    # ignoreErrors:
+    parallel:
+        maximumNumberOfProcesses: 2
+    level: 1
+    paths:
+        - src
+    scanDirectories:
+        - vendor
