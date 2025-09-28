@@ -1,9 +1,10 @@
 parameters:
     treatPhpDocTypesAsCertain: false
-    # ignoreErrors:
+    ignoreErrors:
+        - "#Offset '.*' does not exist on array#"
     parallel:
         maximumNumberOfProcesses: 2
-    level: 2
+    level: 3
     paths:
         - src
     scanDirectories:

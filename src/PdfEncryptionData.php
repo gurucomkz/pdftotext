@@ -246,7 +246,7 @@ class PdfEncryptionData extends PdfObjectBase
     {
         // Encryption mode
         if (!preg_match('#/Filter \s* / (?P<mode> \w+)#ix', $object_data, $object_data_match)) {
-            return (false);
+            return (null);
         }
 
         switch (strtolower($object_data_match ['mode'])) {
@@ -259,7 +259,7 @@ class PdfEncryptionData extends PdfObjectBase
                     error(new DecodingException("Unhandled encryption mode '{$object_data [ 'mode' ]}'", $object_id));
                 }
 
-                return (false);
+                return (null);
         }
 
         // Basic checks have been performed, return an instance of encryption data

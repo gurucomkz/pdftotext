@@ -268,7 +268,7 @@ class PdfInlinedImage extends PdfImage
     /** @noinspection PhpUnusedPrivateMethodInspection
      * @param $data
      *
-     * @return resource
+     * @return \GdImage
      */
     private function __decode_rgb8($data)
     {
@@ -277,6 +277,7 @@ class PdfInlinedImage extends PdfImage
         $width = $this->Width;
         $height = $this->Height;
         $image = imagecreatetruecolor($width, $height);
+        if(!$image) throw new \Exception('failed to instantiate image');
 
         for ($i = 0, $pixel_x = 0, $pixel_y = 0; $i + 3 <= $data_length; $i += 3, $pixel_x++) {
             $red = ord($data [$i]);
@@ -309,7 +310,7 @@ class PdfInlinedImage extends PdfImage
     /** @noinspection PhpUnusedPrivateMethodInspection
      * @param $data
      *
-     * @return resource
+     * @return \GdImage
      */
     private function __decode_cmyk8($data)
     {
@@ -318,6 +319,7 @@ class PdfInlinedImage extends PdfImage
         $width = $this->Width;
         $height = $this->Height;
         $image = imagecreatetruecolor($width, $height);
+        if(!$image) throw new \Exception('failed to instantiate image');
 
         for ($i = 0, $pixel_x = 0, $pixel_y = 0; $i + 4 <= $data_length; $i += 4, $pixel_x++) {
             $cyan = ord($data [$i]);
@@ -352,7 +354,7 @@ class PdfInlinedImage extends PdfImage
     /** @noinspection PhpUnusedPrivateMethodInspection
      * @param $data
      *
-     * @return resource
+     * @return \GdImage
      */
     private function __decode_gray8($data)
     {
@@ -361,6 +363,7 @@ class PdfInlinedImage extends PdfImage
         $width = $this->Width;
         $height = $this->Height;
         $image = imagecreatetruecolor($width, $height);
+        if(!$image) throw new \Exception('failed to instantiate image');
 
         for ($i = 0, $pixel_x = 0, $pixel_y = 0; $i < $data_length; $i++, $pixel_x++) {
             $color = ord($data [$i]);

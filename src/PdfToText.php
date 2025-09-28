@@ -217,7 +217,7 @@ class PdfToText extends PdfObjectBase
 
     // Font mappings
     /** @var PdfTexterFontTable */
-    protected $FontTable = false;
+    protected $FontTable = null;
     // Extra Adobe standard font mappings (for character names of the form "/axxx" for example)
     protected $AdobeExtraMappings = [];
     // Page map object
@@ -227,8 +227,8 @@ class PdfToText extends PdfObjectBase
     protected $PageLocations;
     // Encryption data
     public $IsEncrypted = false;
-    /** @var PdfEncryptionData */
-    protected $EncryptionData = false;
+    /** @var PdfEncryptionData|null */
+    protected $EncryptionData = null;
     // A flag coming from the constructor options, telling if enhanced statistics are enabled
     protected $EnhancedStatistics;
 
@@ -242,9 +242,9 @@ class PdfToText extends PdfObjectBase
     protected $FormaDataObjects;
 
     // Capture data
-    /** @var  CaptureDefinitions */
+    /** @var  CaptureDefinitions|null */
     public $CaptureDefinitions;
-    /** @var  Captures */
+    /** @var  Captures|null */
     protected $CaptureObject;
 
     // Indicates whether global static initializations have been made
@@ -674,7 +674,7 @@ class PdfToText extends PdfObjectBase
         $this->GotAuthorInformation = false;
         $this->ID = '';
         $this->ID2 = '';
-        $this->EncryptionData = false;
+        $this->EncryptionData = null;
         $this->EnhancedStatistics = (($this->Options & self::PDFOPT_ENHANCED_STATISTICS) != 0);
 
         // Also reset cached information that may come from previous runs
@@ -686,8 +686,8 @@ class PdfToText extends PdfObjectBase
         $this->FormDataObjectNumbers = false;
         $this->FomDataDefinitions = [];
         $this->FormDataObjects = [];
-        $this->CaptureDefinitions = false;
-        $this->CaptureObject = false;
+        $this->CaptureDefinitions = null;
+        $this->CaptureObject = null;
         $this->DocumentFragments = [];
 
         // Enable the PDFOPT_BASIC_LAYOUT option if the PDFOPT_CAPTURE flag is specified
@@ -4491,7 +4491,7 @@ class PdfToText extends PdfObjectBase
 
         // Parse encryption information
         $this->EncryptionData = PdfEncryptionData::GetInstance($this->ID, $encrypt_object_id, $pdf_objects [$encrypt_object_id]);
-        $this->IsEncrypted = ($this->EncryptionData !== false);
+        $this->IsEncrypted = ($this->EncryptionData !== null);
     }
 
 
