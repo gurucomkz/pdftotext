@@ -2,6 +2,10 @@ parameters:
     treatPhpDocTypesAsCertain: false
     ignoreErrors:
         - "#Offset '.*' does not exist on array#"
+        # - '#Property [a-zA-Z0-9\\_]+::\$ObjectData is never read, only written\.#'
+        # - '#Property [a-zA-Z0-9\\_]+::\$PageCount is never read, only written\.#'
+        # - '#Property [a-zA-Z0-9\\_]+::\$ShapeDefinition is never read, only written\.#'
+        # - '#Property [a-zA-Z0-9\\_]+::\$UnSupportedEncryptionAlgorithm is never read, only written\.#'
     parallel:
         maximumNumberOfProcesses: 2
     level: 3

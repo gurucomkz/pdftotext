@@ -436,6 +436,7 @@ class FormDefinition // extends  Object
                     error(new FormException("Field \"$field_name\" of group \"{$group [ 'name' ]}\" does not exist."));
                 }
             }
+            $group_names [$group ['name']] = true;
         }
     }
 }

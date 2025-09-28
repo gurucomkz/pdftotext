@@ -72,70 +72,72 @@ class CaptureArea //extends  Object
      *-------------------------------------------------------------------------------------------------------------*/
     public function __construct($area, $default_area = null, $name = '')
     {
-        $left =
-        $top =
-        $right =
-        $bottom =
-        $width =
-        $height = false;
+        $attrs = [
+            'left' => false,
+            'top' => false,
+            'right' => false,
+            'bottom' => false,
+            'width' => false,
+            'height' => false,
+        ];
 
         // Retrieve each entry that allows to specify a coordinate component, using $default_area if needed
         foreach (self::$Keys as $key) {
             if (isset($area [$key])) {
                 if ($area [$key] === false) {
                     if (isset($default_area [$key])) {
-                        $$key = $default_area [$key];
+                        $attrs[$key] = $default_area [$key];
                     } else {
-                        $$key = false;
+                        $attrs[$key] = false;
                     }
                 } else {
-                    $$key = $area [$key];
+                    $attrs[$key] = $area [$key];
                 }
             } elseif (isset($default_area [$key])) {
-                $$key = $default_area [$key];
+                $attrs[$key] = $default_area [$key];
             }
         }
 
         // Check for mandatory coordinates
-        if ($left === false) {
+        if ($attrs['left'] === false) {
             error(new CaptureException("Attribute \"left\" is mandatory."));
         } else {
-            $left = ( double )$left;
+            $attrs['left'] = ( double )$attrs['left'];
         }
 
-        if ($top === false) {
+        if ($attrs['top'] === false) {
             error(new CaptureException("Attribute \"top\" is mandatory."));
         } else {
-            $top = ( double )$top;
+            $attrs['top'] = ( double )$attrs['top'];
         }
 
         // Either the 'right' or 'width' entries are required
-        if ($right === false) {
-            if ($width === false) {
+        if ($attrs['right'] === false) {
+            if ($attrs['width'] === false) {
                 error(new CaptureException("Either the \"right\" or the \"width\" attribute must be specified."));
             } else {
-                $right = $left + ( double )$width - 1;
+                $attrs['right'] = $attrs['left'] + ( double )$attrs['width'] - 1;
             }
         } else {
-            $right = ( double )$right;
+            $attrs['right'] = ( double )$attrs['right'];
         }
 
         // Same for 'bottom' and 'height'
-        if ($bottom === false) {
-            if ($height === false) {
+        if ($attrs['bottom'] === false) {
+            if ($attrs['height'] === false) {
                 error(new CaptureException("Either the \"bottom\" or the \"height\" attribute must be specified."));
             } else {
-                $bottom = $top - ( double )$height + 1;
+                $attrs['bottom'] = $attrs['top'] - ( double )$attrs['height'] + 1;
             }
         } else {
-            $bottom = ( double )$bottom;
+            $attrs['bottom'] = ( double )$attrs['bottom'];
         }
 
         // All done, we have the coordinates we wanted
-        $this->Left = $left;
-        $this->Right = $right;
-        $this->Top = $top;
-        $this->Bottom = $bottom;
+        $this->Left = $attrs['left'];
+        $this->Right = $attrs['right'];
+        $this->Top = $attrs['top'];
+        $this->Bottom = $attrs['bottom'];
 
         $this->Name = $name;
     }

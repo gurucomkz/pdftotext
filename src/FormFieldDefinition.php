@@ -122,7 +122,7 @@ class FormFieldDefinition // extends  Object
                         }
 
                         // Each <case> entry must have a "constant" attribute
-                        if ($constant_value === false && !$is_default) {
+                        if (empty($constant_value) && !$is_default) {
                             error(new FormException("Missing constant value in <case> tag."));
                         }
 

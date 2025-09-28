@@ -413,7 +413,7 @@ class PdfToText extends PdfObjectBase
 
     // As usual, caching a little bit the results of the IsRtlCharacter() method is welcome. Each item will have the value true if the
     // character is RTL, or false if LTR.
-    private $RtlCharacterBuffer = [];
+    // private $RtlCharacterBuffer = [];
 
     // A subset of a character classification array that avoids too many calls to the ctype_* functions or too many
     // character comparisons.
@@ -679,7 +679,7 @@ class PdfToText extends PdfObjectBase
 
         // Also reset cached information that may come from previous runs
         $this->MapIdBuffer = [];
-        $this->RtlCharacterBuffer = [];
+        // $this->RtlCharacterBuffer = [];
         $this->CharacterMapBuffer = [];
         $this->FontObjectsBuffer = [];
         $this->FormData = [];
@@ -1101,7 +1101,7 @@ class PdfToText extends PdfObjectBase
 
         // Free memory
         $this->MapIdBuffer = [];
-        $this->RtlCharacterBuffer = [];
+        // $this->RtlCharacterBuffer = [];
         $this->CharacterMapBuffer = [];
 
         // Compute memory occupied for this file
