@@ -175,7 +175,7 @@ class FormDefinition // extends  Object
         }
 
         $class_def = "// Class " . $this->ClassName . " : " . $this->Version . PHP_EOL .
-            "class {$this -> ClassName}\t\textends PdfToTextFormData" . PHP_EOL .
+            "class {$this -> ClassName}\t\textends \\VanXuan\\PdfToText\\PdfToTextFormData" . PHP_EOL .
             "   {" . PHP_EOL;
 
         // Get the maximum width of constant and field names
@@ -348,7 +348,7 @@ class FormDefinition // extends  Object
         class constructor.
 
      *-------------------------------------------------------------------------------------------------------------*/
-    protected function GetFormDataFromPdfObject($pdf_data)
+    public function GetFormDataFromPdfObject($pdf_data)
     {
         // simplexml_ functions do not like tags that contain a colon - replace them with a dash
         $pdf_data = preg_replace('/(<[^:]+?)(:)/', '$1-', $pdf_data);

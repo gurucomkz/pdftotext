@@ -24,7 +24,7 @@ class ImageExtractionTest extends TestCase
         // is a real image resource that can be specified to any of the image*() Php functions
         $textcolor =  imagecolorallocate($img->ImageResource, 0, 0, 255);
         
-        // Put the string "Hello world" on top of the image. 
+        // Put the string "Hello world" on top of the image.
         imagestring($img->ImageResource, 5, 0, 0, "Hello world #$imgindex", $textcolor);
         
         // Save the image(the default is IMG_JPG, but you can specify another IMG_* image type by specifying it

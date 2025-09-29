@@ -7,9 +7,7 @@
 	"features": {
 		"ghcr.io/shyim/devcontainers-features/php:latest": {
 			"version": "8.3",
-			"extensions": [
-			  "xdebug"
-			]
+			"extensionsExtra": "xdebug"
 		},
 		"ghcr.io/devcontainers/features/git-lfs:1": {}
 	}
